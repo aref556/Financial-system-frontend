@@ -1,0 +1,89 @@
+.login-content {
+    background-image: url("https://www.photoschoolthailand.com/wp-content/uploads/2019/06/Background_5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+/* .material-half-bg .cover {
+  background-image: linear-gradient(to left, #363795, #005C97);
+} */
+
+/* .login-content {
+    background-image: url('https://i.pinimg.com/originals/72/40/55/724055733047bec21ad96ce4dad37013.jpg');
+    background-image: url('https://www.icegif.com/wp-content/uploads/among-us-icegif-1.gif'); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  } */
+  
+  
+  .login-box {
+    opacity: 0.85;
+    min-width: 420px;
+    min-height: 420px;
+  }
+  
+  .login-content .logo {
+    background-color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+    opacity: 0.85;
+    border-radius: 15px;
+    
+  }
+  
+  h1.logo-front {
+    font-family: 'Mali', cursive;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 1;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+  
+  .login-content .login-box, .login-head{
+    font-family: 'TH SarabunPSK';
+  }
+  
+  .login-content .login-form .login-head {
+    font-size: 30px;
+  }
+  
+  .login-content .login-form .form-group .control-label {
+    font-size: 20px;
+  }
+  
+  .login-content .login-form .form-group .form-control {
+    font-size: 20px;
+  }
+  
+  .login-box {
+    border-radius: 20px;
+    padding-bottom: 500px;
+  }
+  
+  .form-group .btn {
+    /* background-image: linear-gradient(to left, #363795, #005C97); */
+    background-image: linear-gradient(to left, #45B649, #DCE35B);
+    /* background-image: linear-gradient(to left, #e52d27, #b31217); */
+    border: none;
+    font-size: 20px;
+  }
+  
+  .btn {
+    color: white;
+  }
+  
+  
+  .form-group {
+    font-family: 'TH SarabunPSK';
+    /* font-family: 'Mali', cursive; */
+    font-size: 20px;
+  }
+  
+  .btn-third {
+    background-image: linear-gradient(to left, #e52d27, #b31217);
+  }

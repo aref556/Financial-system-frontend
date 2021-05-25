@@ -1,0 +1,147 @@
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
+                        src="https://yt3.ggpht.com/ytc/AAUvwnj3mH4sGVyr0snToJAhfWHBKpqaMAItOi4dRj42nQ=s900-c-k-c0x00ffffff-no-rj"
+                        alt="User Image" width="80">
+                <div>
+                        <p class="app-sidebar__user-name">LuLu</p>
+                        <p class="app-sidebar__user-designation">User</p>
+                </div>
+        </div>
+        <ul class="app-menu">
+                <!-- <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span
+                    class="app-menu__label">dashboard</span></a></li> -->
+                <!-- ฟอร์มเอกสาร -->
+                <li class="treeview" [routerLinkActive]="['is-expanded']">
+                        <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <i class="app-menu__icon fa fa-laptop"></i><span
+                                        class="app-menu__label">สร้างฟอร์มการชำระเงิน</span><i
+                                        class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                                <li><a class="treeview-item"
+                                                [routerLink]="['/', AppURL.Authen, AuthURL.InvoiceDocument]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> เอกสารแจ้งหนี้</a>
+                                </li>
+
+                                <li><a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.Invoice]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> ใบแจ้งหนี้</a>
+                                </li>
+
+                                <li>
+                                        <a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.Delivery]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> ใบส่งของ</a>
+                                </li>
+                                <li>
+                                        <a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.MessageMemos]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> บันทึกข้อความ</a>
+                                </li>
+
+                                <!-- <li><a class="treeview-item" href="widgets.html">
+                    <i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
+                        </ul>
+                </li>
+
+                <!-- จัดการรายการการชำระเงิน -->
+                <li><a class="app-menu__item" [routerLink]="['/', AppURL.Authen, AuthURL.Financials]"
+                                routerLinkActive="active">
+                                <i class="app-menu__icon fa fa-pie-chart"></i>
+                                <span class="app-menu__label">แสดงรายการการชำระเงิน</span></a>
+                </li>
+
+                <!-- จัดการบัญชีผู้ใช้ -->
+                <li class="treeview" [routerLinkActive]="['is-expanded']">
+                        <a class="app-menu__item" href="#" data-toggle="treeview"><i
+                                        class="app-menu__icon fa fa-laptop"></i><span
+                                        class="app-menu__label">จัดการบัญชีผู้ใช้</span><i
+                                        class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                                <li><a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.Users]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> แสดงรายการผู้ใช้</a>
+                                </li>
+
+                                <li><a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.CreateUser]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> สร้างบัญชีผู้ใช้</a>
+                                </li>
+
+                                <!-- <li><a class="treeview-item" href="widgets.html">
+            <i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
+                        </ul>
+                </li>
+
+                <!-- จัดการบัญชีผู้ดูแล -->
+                <li class="treeview" [routerLinkActive]="['is-expanded']">
+                        <a class="app-menu__item" href="#" data-toggle="treeview"><i
+                                        class="app-menu__icon fa fa-laptop"></i><span
+                                        class="app-menu__label">จัดการบัญชีผู้ดูแล</span><i
+                                        class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                                <li><a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.Admins]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> แสดงรายการผู้ดูแล</a>
+                                </li>
+
+                                <li><a class="treeview-item" [routerLink]="['/', AppURL.Authen, AuthURL.CreateAdmin]"
+                                                routerLinkActive="active">
+                                                <i class="icon fa fa-circle-o"></i> สร้างบัญชีผู้ดูแล</a>
+                                </li>
+
+                                <!-- <li><a class="treeview-item" href="widgets.html">
+    <i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
+                        </ul>
+                </li>
+
+                <!-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                    class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i
+                    class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                        Components</a></li>
+                <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                        Components</a></li>
+                <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
+                        Samples</a></li>
+                <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                        Notifications</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                    class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i
+                    class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic
+                        Tables</a></li>
+                <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data
+                        Tables</a></li>
+            </ul>
+        </li>
+        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                    class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i
+                    class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item active" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a>
+                </li>
+                <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a>
+                </li>
+            </ul>
+        </li> -->
+        </ul>
+</aside>

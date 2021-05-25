@@ -1,0 +1,266 @@
+<app-auth-content>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-edit"></i>เอกสารแจ้งหนี้</h1>
+            <p>ตัวทดลอง</p>
+        </div>
+        <!-- <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">Forms</li>
+            <li class="breadcrumb-item"><a href="#">Form Components</a></li>
+        </ul> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <form [formGroup]="form" (submit)="onSubmit()">
+                    <div class="form-group">
+                        <label>*ที่ อว 68011.1/ :</label>
+                        <input class="form-control" formControlName="id_doc" type="text" placeholder="088">
+                        <!-- <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label>*วันที่ :</label>
+                        <input class="form-control" formControlName="date" type="date" placeholder="19 เมษายน 2564">
+                        <!-- <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small> -->
+                    </div>
+
+                    <!-- <div class="form-group">
+                                <label>สำนักอะไร :</label>
+                                <input class="form-control" formControlName="address_option" type="text"
+                                    placeholder="สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ, มหาวิทยาลัยสงขลานครินทร์, ต. หาดใหญ่, จ. สงขลา, 90110">
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label>*วันที่ :</label>
+                                <input class="form-control" formControlName="date" type="date"
+                                    placeholder="19 เมษายน 2564">
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div> -->
+
+                    <div class="form-group">
+                        <label>*เรื่อง :</label>
+                        <input class="form-control" formControlName="title" type="text"
+                            placeholder="ขอแจ้งค่าเช่า Core Fiber">
+                        <!-- <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label>*เรียน</label>
+                        <textarea class="form-control" formControlName="title_to" type="text"
+                            placeholder="สำนักงานไปรษณีย์ เขต 9 สาขาที่ 1011 " rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ที่อยู่</label>
+                        <textarea class="form-control" formControlName="address" type="text"
+                            placeholder="9/9 หมู่ 9 ค.ท่าช้าง อ.บางกล่ำ จ.สงขลา เลขประจำตัวผู้เสียภาษี 0105546095724"
+                            rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>*เนื้อหาบทความ: </label>
+                        <textarea class="form-control" formControlName="message" type="text"
+                            placeholder="ข้อความเริ่ม .." rows="5"></textarea>
+                    </div>
+
+                    <!-- เลือกผู้ส่ง -->
+                    <div class="form-group">
+                        <label>ผู้รองรับ :</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend" dropdown>
+                                <li dropdownToggle type="li" class="btn btn-primary dropdown-toggle"
+                                    aria-controls="dropdown-animated">
+                                    {{forwarder_select.name}} <span class="caret"></span>
+                                </li>
+                                <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"
+                                    aria-labelledby="button-animated">
+                                    <li *ngFor='let item of forwarders' role="menuitem">
+                                        <a class="dropdown-item" (click)="forwarder_select = item">
+                                            {{item.name}}
+                                        </a>
+                                    </li>
+                                    <!-- <li role="menuitem"><a class="dropdown-item">รศ.ดร. สินชัย กมลภิวงศ์</a>
+                                                    </li>
+                                                    <li role="menuitem"><a class="dropdown-item">ดร. ชิดชนก โชคสุชาติ</a>
+                                                    </li>
+                                                    <li role="menuitem"><a class="dropdown-item">นางเนาวรัตน์ สอิด</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group">
+                                <label>*ข้อความจบ</label>
+                                <textarea class="form-control" formControlName="message_end" type="text"
+                                    placeholder="ข้อความจบ .." rows="5"></textarea>
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label>ชื่อคนทำ : </label>
+                                <input class="form-control" formControlName="manager_name" type="text"
+                                    placeholder="นางเนาวรัตน์ สอิด">
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label>ตำแหน่ง :</label>
+                                <input class="form-control" formControlName="manager_position" type="text"
+                                    placeholder="หัวหน้าฝ่ายบริหารจัดการสำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ">
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label>สำนักอะไร:</label>
+                                <input class="form-control" formControlName="" type="text" placeholder="">
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label for="exampleInputPassword1">สำนักอะไร</label>
+                                <input class="form-control" id="exampleInputPassword1" type="password"
+                                    placeholder="Password">
+                            </div> -->
+
+                    <!-- <div class="form-group">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div> -->
+                    <!-- <div class="form-group">
+                                <label for="exampleSelect2">Example multiple select</label>
+                                <select class="form-control" id="exampleSelect2" multiple="">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div> -->
+                    <!-- <div class="form-group">
+                                <label for="exampleTextarea">Example textarea</label>
+                                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            </div> -->
+                    <!-- <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input class="form-control-file" id="exampleInputFile" type="file"
+                                    aria-describedby="fileHelp"><small class="form-text text-muted" id="fileHelp">This
+                                    is some placeholder block-level help text for the above input. It's a bit lighter
+                                    and easily wraps to a new line.</small>
+                            </div> -->
+                    <!-- <fieldset class="form-group">
+                                <legend>Radio buttons</legend>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" id="optionsRadios1" type="radio"
+                                            name="optionsRadios" value="option1" checked="">Option one is this and
+                                        that—be sure to include why it's great
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" id="optionsRadios2" type="radio"
+                                            name="optionsRadios" value="option2">Option two can be something else and
+                                        selecting it will deselect option one
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" id="optionsRadios3" type="radio"
+                                            name="optionsRadios" value="option3" disabled="">Option three is disabled
+                                    </label>
+                                </div>
+                            </fieldset> -->
+                    <!-- <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox">Check me out
+                                </label>
+                            </div> -->
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary">
+                            สร้างฟอร์ม
+                        </button>
+                    </div>
+                </form>
+                <!-- <div class="col-lg-4 offset-lg-1">
+                        <form>
+                            <div class="form-group">
+                                <fieldset disabled="">
+                                    <label class="control-label" for="disabledInput">Disabled input</label>
+                                    <input class="form-control" id="disabledInput" type="text"
+                                        placeholder="Disabled input here..." disabled="">
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <fieldset>
+                                    <label class="control-label" for="readOnlyInput">Readonly input</label>
+                                    <input class="form-control" id="readOnlyInput" type="text"
+                                        placeholder="Readonly input here…" readonly="">
+                                </fieldset>
+                            </div>
+                            <div class="form-group has-success">
+                                <label class="form-control-label" for="inputSuccess1">Valid input</label>
+                                <input class="form-control is-valid" id="inputValid" type="text">
+                                <div class="form-control-feedback">Success! You've done it.</div>
+                            </div>
+                            <div class="form-group has-danger">
+                                <label class="form-control-label" for="inputDanger1">Invalid input</label>
+                                <input class="form-control is-invalid" id="inputInvalid" type="text">
+                                <div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label col-form-label-lg" for="inputLarge">Large input</label>
+                                <input class="form-control form-control-lg" id="inputLarge" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="inputDefault">Default input</label>
+                                <input class="form-control" id="inputDefault" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label col-form-label-sm" for="inputSmall">Small input</label>
+                                <input class="form-control form-control-sm" id="inputSmall" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Input addons</label>
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                                        <input class="form-control" id="exampleInputAmount" type="text"
+                                            placeholder="Amount">
+                                        <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div> -->
+                <!-- <div class="tile-footer">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</app-auth-content>
