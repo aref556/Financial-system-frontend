@@ -1,0 +1,114 @@
+{
+  "_from": "pdfmake-thai",
+  "_id": "pdfmake-thai@0.1.38",
+  "_inBundle": false,
+  "_integrity": "sha512-+XR5d5XrUFXFGO1XUCuL1Rypx6uUtm8XqFM/kgcnaIXg//IsBdNmAcnbHlpFKON7HvPJor0T1k68iSVucWG14Q==",
+  "_location": "/pdfmake-thai",
+  "_phantomChildren": {
+    "concat-stream": "1.6.2",
+    "convert-source-map": "1.7.0",
+    "core-util-is": "1.0.2",
+    "duplexer2": "0.1.4",
+    "estraverse": "4.3.0",
+    "esutils": "2.0.3",
+    "falafel": "2.2.4",
+    "fontkit": "1.8.1",
+    "has": "1.0.3",
+    "inherits": "2.0.4",
+    "isarray": "1.0.0",
+    "optionator": "0.8.3",
+    "png-js": "1.0.0",
+    "process-nextick-args": "2.0.1",
+    "quote-stream": "1.0.2",
+    "resolve": "1.20.0",
+    "safe-buffer": "5.1.2",
+    "shallow-copy": "0.0.1",
+    "static-eval": "2.1.0",
+    "through2": "2.0.5",
+    "tiny-inflate": "1.0.3",
+    "util-deprecate": "1.0.2",
+    "vlq": "0.2.3"
+  },
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "pdfmake-thai",
+    "name": "pdfmake-thai",
+    "escapedName": "pdfmake-thai",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/pdfmake-thai/-/pdfmake-thai-0.1.38.tgz",
+  "_shasum": "fe35d95bfa19a8d6f3ede9cdc19432767895f5ef",
+  "_spec": "pdfmake-thai",
+  "_where": "C:\\Users\\Home\\Documents\\R\\Y4\\practicework\\financial-v1\\financial-system-frontend-v2",
+  "author": {
+    "name": "Bartek Pampuch",
+    "email": "bartosz.pampuch@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/pumzth/pdfmake-thai/issues"
+  },
+  "bundleDependencies": false,
+  "config": {
+    "blanket": {
+      "pattern": "src",
+      "data-cover-never": [
+        "node_modules",
+        "tests"
+      ]
+    }
+  },
+  "dependencies": {
+    "iconv-lite": "^0.4.24",
+    "linebreak": "^0.3.0",
+    "pdfkit": "^0.8.3"
+  },
+  "deprecated": false,
+  "description": "Client/server side PDF printing in pure JavaScript",
+  "devDependencies": {
+    "brfs": "^2.0.1",
+    "expose-loader": "^0.7.5",
+    "fancy-log": "^1.3.2",
+    "file-saver": "^1.3.8",
+    "gulp": "^4.0.0",
+    "gulp-each": "^0.5.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-file-contents-to-json": "^0.2.2",
+    "gulp-spawn-mocha": "^5.0.1",
+    "mocha": "^5.2.0",
+    "plugin-error": "^1.0.1",
+    "rewire": "^4.0.1",
+    "sinon": "^6.1.5",
+    "string-replace-webpack-plugin": "^0.1.3",
+    "transform-loader": "^0.2.4",
+    "webpack": "3.11.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "homepage": "http://pdfmake.org",
+  "keywords": [
+    "pdf",
+    "javascript",
+    "printing",
+    "layout"
+  ],
+  "license": "MIT",
+  "main": "src/printer.js",
+  "name": "pdfmake-thai",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pumzth/pdfmake-thai.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp"
+  },
+  "version": "0.1.38"
+}

@@ -14,6 +14,48 @@
         <div class="col-md-12">
             <div class="tile">
                 <form [formGroup]="form" (submit)="onSubmit()">
+                    <!-- ประเภทของรายได้ -->
+                    <!-- <div class="form-group">
+                        <label class="control-label">ประเภทของรายได้</label>
+                        <small class="form-text text-muted">
+                            หากไม่เลือกประเภทของรายได้เอกสารจะถูกจัดอยู่ในหมวดหมู่ #ไม่ระบุประเภทของรายได้#
+                        </small>
+                        <div *ngFor='let item of type_income'>
+                            <div class="form-check">
+                                <label class="form-check-label" (click)="onTest(item)">
+                                    <input class="form-check-input" type="radio" name="gender">{{item.type}}
+                                </label>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label>ประเภทของรายได้ :</label>
+                        <small class="form-text text-muted">
+                            หากไม่เลือกประเภทของรายได้เอกสารจะถูกจัดอยู่ในหมวดหมู่ #ไม่ระบุประเภทของรายได้#
+                        </small>
+                        <div class="input-group">
+                            <div class="input-group-prepend" dropdown>
+                                <li dropdownToggle type="li" class="btn btn-primary dropdown-toggle"
+                                    aria-controls="dropdown-animated">
+                                    {{type_income_select.type}} <span class="caret"></span>
+                                </li>
+                                <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"
+                                    aria-labelledby="button-animated">
+                                    <li *ngFor='let item of type_income' role="menuitem">
+                                        <a class="dropdown-item" (click)="onSelectType(item)">
+                                            {{item.type}}
+                                        </a>
+                                    </li>
+                                    <!-- <li role="menuitem"><a class="dropdown-item">รศ.ดร. สินชัย กมลภิวงศ์</a>
+                                            </li>
+                                            <li role="menuitem"><a class="dropdown-item">ดร. ชิดชนก โชคสุชาติ</a>
+                                            </li>
+                                            <li role="menuitem"><a class="dropdown-item">นางเนาวรัตน์ สอิด</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label>*วันที่:</label>
                         <input class="form-control" formControlName="date" type="date">
@@ -129,22 +171,6 @@
                                             </li>
                                             <li role="menuitem"><a class="dropdown-item">นางเนาวรัตน์ สอิด</a></li> -->
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ประเภทของรายได้ -->
-                    <!-- เลือกผู้ส่ง -->
-                    <div class="form-group">
-                        <label class="control-label">ประเภทของรายได้</label>
-                        <small class="form-text text-muted">
-                            หากไม่เลือกประเภทของรายได้เอกสารจะถูกจัดอยู่ในหมวดหมู่ #ไม่ระบุประเภทของรายได้#
-                        </small>
-                        <div *ngFor='let item of type_income'>
-                            <div class="form-check">
-                                <label class="form-check-label" (click)="onTest(item)">
-                                    <input class="form-check-input" type="radio" name="gender">{{item.type}}
-                                </label>
                             </div>
                         </div>
                     </div>

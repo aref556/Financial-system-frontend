@@ -5,8 +5,11 @@ export interface InInvoiceComponent {
     doc: InInvoice;
     forwarders: ForwarderSelect[];
     forwarder_select: ForwarderSelect;
+    type_income: TypeIncome[];
+    type_income_select: TypeIncome;
 
     onSubmit(): void;
+    onSelectType(select: TypeIncome): void;
 }
 
 
@@ -32,12 +35,13 @@ export interface InInvoice {
     type: number;
     forwarder: string;
     forwarder_position: string;
+    type_income: string;
 
 }
 
 export interface ForwarderSelect {
-    id:number;
-    name:string;
+    id: number;
+    name: string;
     job_position: string;
 
 }
@@ -52,4 +56,3 @@ export interface TypeIncome {
 //     InvoiceDocument = 2,
 //     Delivery = 3,
 // }
- 

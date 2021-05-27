@@ -1,13 +1,16 @@
 import { FormGroup } from "@angular/forms";
-import { ForwarderSelect } from "../invoice/invoice.interface";
+import { ForwarderSelect, TypeIncome } from "../invoice/invoice.interface";
 
 export interface InInvoiceDocumentComponent {
     form: FormGroup;
     doc: InInvoiceDocument;
     forwarders: ForwarderSelect[];
     forwarder_select: ForwarderSelect;
+    type_income: TypeIncome[];
+    type_income_select: TypeIncome;
 
     onSubmit(): void;
+    onSelectType(select: TypeIncome): void;
 }
 
 
@@ -30,7 +33,8 @@ export interface InInvoiceDocument {
     type: number;
     guarantor: string;
     guarantor_position: string;
+    type_income: string;
 
 
-    
+
 }

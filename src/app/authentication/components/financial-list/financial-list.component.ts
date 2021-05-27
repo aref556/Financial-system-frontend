@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
-import { InRoleDocument, InDocument, FinancialDocumentService } from 'src/app/authentication/services/financial-document.service';
+import { InRoleDocument, InDocument, FinancialDocumentService, InFlagStatus } from 'src/app/authentication/services/financial-document.service';
 import { AuthenService } from 'src/app/services/authen.service';
 import { AccountService, InAccount, InRoleAccount } from 'src/app/shareds/services/account.service';
 import { AlertService } from 'src/app/shareds/services/alert.service';
@@ -42,10 +42,7 @@ export class FinancialListComponent implements InFinancialListComponent {
 
 
   }
-  docInvoice: InInvoice;
-  docInvoiceDocument: InInvoiceDocument;
-  docMessageMemos: InMessageMemos;
-  docDelivery: InDelivery;
+
   items: InDocumentList;
   // ตัวแปรสำหรับค้นหา
   searchText: string = '';
@@ -58,7 +55,7 @@ export class FinancialListComponent implements InFinancialListComponent {
   ];
   // ตัวแปร pagination
   startPage: number = 1;
-  limitPage: number = 5;
+  limitPage: number = 10;
 
   //ตรวจสอบสิทธ์ผู้ใช้งาน
   UserLogin: InAccount;
@@ -101,6 +98,13 @@ export class FinancialListComponent implements InFinancialListComponent {
       return InRoleDocument[role];
   }
 
+  getFlagStatus(role: InFlagStatus) {
+    if (InFlagStatus[role] == InFlagStatus[1])
+      return 'กำลังดำเนินการ';
+    if (InFlagStatus[role] == InFlagStatus[2])
+      return 'ดำเนินการเสร็จสิ้น';
+  }
+
   onDeleteDocument(item: InDocument): void {
     // this.alert.askConfirm().then(status => {
     //   if (!status) return;
@@ -122,27 +126,36 @@ export class FinancialListComponent implements InFinancialListComponent {
 
   async onLookDocument(item: InDocument) {
     const doc = await this.document.getDocumentById(item.id);
-    const doc2 = JSON.stringify(doc);
-    const doc3 = JSON.parse(doc2);
-    const doc4: InInvoice = doc3;
-    this.pdf.generateInvoice(doc4);
-    // const doc2: InInvoice = Object.keys(doc).map(
-    //   (key: string): string => doc 
-    // )
-    // this.document
-    //   .getDocumentById(item.id)
-    //   .then(doc => {
-    //     this.docInvoice = doc;
-    //   })
-    //   .then(doc => {
-    //     if(doc.type == 1) {
-    //       console.log("doc: " +doc);
-    //       console.log("docInvoice: "+ this.docInvoice);
-    //       this.pdf.generateInvoice(this.docInvoice);
-    //     }
-    //   })
-    //   .catch(err => this.alert.notify(err.Message))
+    const doc_string = JSON.stringify(doc);
+    const doc_object = JSON.parse(doc_string);
+    try {
+      if (doc.type == 1) {
+        // const docInvoice: InInvoice = doc_object;
+        await this.pdf.generateInvoice(doc_object as InInvoice);
+      }
+      if (doc.type == 2) {
+        await this.pdf.generateInvoiceDocs(doc_object as InInvoiceDocument);
+      }
+      if (doc.type == 3) {
+        await this.pdf.generateDelivery(doc_object as InDelivery);
+      }
+      if (doc.type == 4) {
+        await this.pdf.generateMessageMemos(doc_object as InMessageMemos);
+      }
 
+    } catch (error) {
+      this.alert.notify(error.Message);
+    }
+  }
+
+  async onSuccessStatus(item: InDocument) {
+    const doc = await this.document.updateFlagStatus(item.id);
+    this.initialLoadDocuments({
+      searchText: this.getSearchText,
+      searchType: this.searchType.key,
+      startPage: this.startPage,
+      limitPage: this.limitPage
+    })
   }
 
   private get getSearchText() {
@@ -187,26 +200,6 @@ export class FinancialListComponent implements InFinancialListComponent {
       .getUserLogin(this.authen.getAuthenticated())
       .then(userLogin => this.UserLogin = userLogin)
       .catch(err => this.alert.notify(err.Message));
-  }
-
-  private async generateForm(doc: InDocument) {
-    if (doc.type == 1) {
-      this.docInvoice.address = doc.address;
-      this.docInvoice.date = doc.date;
-      this.docInvoice.forwarder = doc.forwarder;
-      this.docInvoice.forwarder_position = doc.forwarder_position;
-      this.docInvoice.guarantee = doc.guarantee;
-      this.docInvoice.payment_due = parseInt(doc.payment_due);
-      this.docInvoice.product_detail_1 = doc.product_detail_1;
-      this.docInvoice.product_number_1 = doc.product_number_1;
-      this.docInvoice.product_prize_1 = doc.product_prize_1;
-      this.docInvoice.product_detail_2 = doc.product_detail_2;
-      this.docInvoice.product_number_2 = doc.product_number_2;
-      this.docInvoice.product_prize_2 = doc.product_prize_2;
-      this.docInvoice.product_total_prize = doc.product_total_prize;
-      this.docInvoice.type = doc.type;
-      console.log(this.docInvoice);
-    }
   }
 
 }

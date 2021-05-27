@@ -16,24 +16,24 @@ export class FinancialDocumentService {
 
     onCreateDelivery(model: InDelivery) {
         return this.http
-            .requestPost('api/user/create-delivery', model, this.auth.getAuthenticated())
+            .requestPost('api/document/create-delivery', model, this.auth.getAuthenticated())
             .toPromise() as Promise<InDelivery>;
     }
     onCreateInvoice(model: InInvoice) {
         return this.http
-            .requestPost('api/user/create-invioce', model, this.auth.getAuthenticated())
+            .requestPost('api/document/create-invioce', model, this.auth.getAuthenticated())
             .toPromise() as Promise<InInvoice>;
     }
 
     onCreateInvoiceDocument(model: InInvoiceDocument) {
         return this.http
-            .requestPost('api/user/create-invioce-document', model, this.auth.getAuthenticated())
+            .requestPost('api/document/create-invioce-document', model, this.auth.getAuthenticated())
             .toPromise() as Promise<InInvoiceDocument>;
     }
 
     onCreateMessageMemos(model: InMessageMemos) {
         return this.http
-            .requestPost('api/user/create-message-memos', model, this.auth.getAuthenticated())
+            .requestPost('api/document/create-message-memos', model, this.auth.getAuthenticated())
             .toPromise() as Promise<InMessageMemos>;
     }
 
@@ -56,6 +56,14 @@ export class FinancialDocumentService {
         return this.http
             .requestDelete(`api/document/${id}`, this.auth.getAuthenticated())
             .toPromise() as Promise<number>;
+    }
+
+    // แก้ไขข้อมูลสถานะการดำเนินงาน
+    updateFlagStatus(id: any) {
+        const flag_status = {'flag_status': 2};
+        return this.http
+            .requestPut(`api/document/handle-status/${id}`, flag_status, this.auth.getAuthenticated() )
+            .toPromise() as Promise<InDocument>;
     }
 
 }
@@ -90,6 +98,7 @@ export interface InDocument {
     created_time: Date;
     success_time: string,
     flag_status: InFlagStatus,
+    type_income: string,
 
 }
 

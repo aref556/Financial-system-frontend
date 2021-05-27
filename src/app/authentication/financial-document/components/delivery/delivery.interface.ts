@@ -9,7 +9,7 @@ export interface InDeliveryComponent {
     type_income_select: TypeIncome;
 
     onSubmit(): void;
-    onTest(select: TypeIncome): void;
+    onSelectType(select: TypeIncome): void;
 }
 
 export interface InDelivery {

@@ -1,5 +1,5 @@
 import { PageChangedEvent } from "ngx-bootstrap/pagination";
-import { InDocument, InRoleDocument } from "src/app/authentication/services/financial-document.service";
+import { InDocument, InFlagStatus, InRoleDocument } from "src/app/authentication/services/financial-document.service";
 import { InAccount, InRoleAccount } from "src/app/shareds/services/account.service";
 import { InDelivery } from "../../financial-document/components/delivery/delivery.interface";
 import { InInvoiceDocument } from "../../financial-document/components/invoice-document/invoice-document.interface";
@@ -21,16 +21,14 @@ export interface InFinancialListComponent {
     onPageChanged(page: PageChangedEvent);
 
     getTypeName(role: InRoleDocument): void;
+    getFlagStatus(role: InFlagStatus): void;
     onDeleteDocument(item: InDocument): void;
-    onLookDocument(doc: InDocument);
+    onLookDocument(item: InDocument);
+    onSuccessStatus(item: InDocument);
 
     UserLogin: InAccount;
     Role: typeof InRoleAccount;
 
-    docInvoice : InInvoice;
-    docInvoiceDocument: InInvoiceDocument;
-    docMessageMemos: InMessageMemos;
-    docDelivery: InDelivery;
 }
 
 export interface InDocumentList {

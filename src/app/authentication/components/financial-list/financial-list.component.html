@@ -2,7 +2,8 @@
     <div class="app-title">
         <div>
             <h1>
-                <i class="fa fa-users"></i> รายการเอกสารทางการเงิน</h1>
+                <i class="fa fa-users"></i> รายการเอกสารทางการเงิน
+            </h1>
             <p>หน้าแสดงรายการ เอกสาร ค้นหา ลบ และ เรียกดูเอกสาร</p>
         </div>
         <!-- <ul class="app-breadcrumb breadcrumb">
@@ -26,11 +27,13 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend" dropdown>
-                                <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+                                <button id="button-basic" dropdownToggle type="button"
+                                    class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
                                     {{ searchType.value }}
                                     <span class="caret"></span>
                                 </button>
-                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                    aria-labelledby="button-basic">
                                     <li *ngFor="let item of searchTypeItems" role="menuitem">
                                         <a class="dropdown-item" (click)="searchType = item">
                                             {{ item.value }}
@@ -40,9 +43,10 @@
                             </div>
 
                             <div [ngSwitch]="searchType.key">
-                                <input *ngSwitchCase="'updated'" bsDaterangepicker placement="left" type="text" [(ngModel)]="searchText" class="form-control"
+                                <input *ngSwitchCase="'updated'" bsDaterangepicker placement="left" type="text"
+                                    [(ngModel)]="searchText" class="form-control" placeholder="ค้นหาข้อมูล">
+                                <input *ngSwitchDefault type="text" [(ngModel)]="searchText" class="form-control"
                                     placeholder="ค้นหาข้อมูล">
-                                <input *ngSwitchDefault type="text" [(ngModel)]="searchText" class="form-control" placeholder="ค้นหาข้อมูล">
                             </div>
 
                             <div class="input-group-append">
@@ -60,9 +64,12 @@
                             <thead>
                                 <tr>
                                     <th>หมายเลขเอกสาร</th>
+                                    <th>สถานะการดำเนินงาน</th>
                                     <th>ประเภทเอกสาร</th>
+                                    <th>ประเภทของรายได้</th>
                                     <th>ผู้สร้างเอกสาร</th>
                                     <th>วันที่</th>
+                                    <th>การจัดการ <br>(อนุมัติ/ดูไฟล์/ลบ)</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -70,15 +77,18 @@
                             <tbody>
                                 <tr *ngFor="let item of items.items">
                                     <td>{{ item.id_doc }}</td>
+                                    <td>{{ getFlagStatus(item.flag_status) }}</td>
                                     <td>{{ getTypeName(item.type) }}</td>
+                                    <td>{{ item.type_income}}</td>
                                     <td>{{ item.created_by }}</td>
                                     <!-- <td>{{ item.lastname }}</td> -->
                                     <!-- <td>{{ item.position }}</td> -->
                                     <!-- <td>{{ getRoleName(item.role) }}</td> -->
                                     <td>{{ item.created_time | date : 'dd-MM-yyyy' }}</td>
-                                    <td class="text-right">
-                                        <i (click)="onDeleteDocument(item)" class="fa fa-trash cur"></i>
-                                        <i (click)="onLookDocument(item)" class="fa fa-home cur"></i>
+                                    <td class="text-center">
+                                        <i (click)="onSuccessStatus(item)" class="fa fa-paper-plane cur" aria-hidden="true">&nbsp;/&nbsp;</i>
+                                        <i (click)="onLookDocument(item)" class="fa fa-file cur" aria-hidden="true">&nbsp;/&nbsp;</i>
+                                        <i (click)="onDeleteDocument(item)" class="fa fa-trash cur">&nbsp;&nbsp;</i>
                                     </td>
                                 </tr>
                             </tbody>
@@ -92,8 +102,10 @@
                             </tfoot>
                         </table>
 
-                        <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage" (pageChanged)="onPageChanged($event)" [rotate]="false" [maxSize]="10"
-                            previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="items.totalItems"></pagination>
+                        <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage"
+                            (pageChanged)="onPageChanged($event)" [rotate]="false" [maxSize]="10"
+                            previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="items.totalItems">
+                        </pagination>
                     </div>
                 </div>
             </div>
