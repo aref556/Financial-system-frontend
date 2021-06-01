@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertService } from './services/alert.service';
 import { AccountService } from './services/account.service';
 import { PdfService } from './services/pdf.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -26,6 +27,7 @@ import { PdfService } from './services/pdf.service';
     FormsModule,
     ReactiveFormsModule,
     PaginationModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   exports: [
     AuthNavbarComponent,
@@ -35,6 +37,7 @@ import { PdfService } from './services/pdf.service';
     FormsModule,
     ReactiveFormsModule,
     PaginationModule,
+    ModalModule,
   ],
   providers: [
     AlertService,

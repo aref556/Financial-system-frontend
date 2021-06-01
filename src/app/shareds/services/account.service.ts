@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { InInvoiceDocument } from "src/app/authentication/financial-document/components/invoice-document/invoice-document.interface";
+import { InModalChangePassword } from "src/app/authentication/components/profile/modal-change-password/modal-change-password.interface";
+import { InProfile } from "src/app/authentication/components/profile/profile.interface";
 import { InLogin } from "src/app/components/login/login.interface";
 import { AuthenService } from "src/app/services/authen.service";
 import { HttpService } from "src/app/services/http.service";
@@ -21,9 +22,23 @@ export class AccountService {
         this.userLogin.password = userLogin.password;
         this.userLogin.firstname = userLogin.firstname;
         this.userLogin.lastname = userLogin.lastname;
-        this.userLogin.phone_number = userLogin.phone_number;
         this.userLogin.role = userLogin.role;
+        this.userLogin.position = userLogin.position;
         return this.userLogin;
+    }
+
+    //แก้ไขข้อมูลส่วนตัว
+    onUpdateProfile(accessToken: string, model: InProfile) {
+        return (this.http
+            .requestPost(`api/user/profile`, model, accessToken)
+            .toPromise() as Promise<InAccount>)
+            .then(user => this.setUserLogin(user));
+    }
+
+    onUpdatePassword(accessToken: string, model: InModalChangePassword) {
+        return this.http
+            .requestPost(`api/user/change-password`, model, accessToken)
+            .toPromise() as Promise<{ status: boolean }>;
     }
 
     onLogin(model: InLogin) {
@@ -47,9 +62,9 @@ export interface InAccount {
     username: string;
     password: string;
 
-    firstname: String;
-    lastname: String;
-    phone_number: String;
+    firstname: string;
+    lastname: string;
+    position: string;
     role: InRoleAccount;
 
     id: string;

@@ -10,12 +10,15 @@ import { ManageUsersModule } from './manage-users/manage-users.module';
 import { SharedsModule } from '../shareds/shareds.module';
 import { UserService } from './services/user.services';
 import { FinancialDocumentService } from './services/financial-document.service';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalChangePasswordComponent } from './components/profile/modal-change-password/modal-change-password.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     FinancialListComponent,
+    ModalChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,7 @@ import { FinancialDocumentService } from './services/financial-document.service'
     FinancialDocumentModule,
     ManageAdminsModule,
     ManageUsersModule,
+    PaginationModule.forRoot(),
   ],
   providers: [
     UserService,

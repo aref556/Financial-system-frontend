@@ -19,7 +19,7 @@ export class AuthSidebarComponent implements OnInit, InAuthSidebarComponent {
     private authen: AuthenService,
     private alert: AlertService,
     private router: Router,
-  ) { 
+  ) {
     this.initialLoadUserLogin();
   }
 
@@ -50,5 +50,19 @@ export class AuthSidebarComponent implements OnInit, InAuthSidebarComponent {
         this.authen.clearAuthenticated();
         this.router.navigate(['/', AppURL.Login]);
       });
+  }
+
+  getRoleName(role: InRoleAccount) {
+    try {
+      if (InRoleAccount[role] == InRoleAccount[1])
+        return 'บัญชีผู้ใช้';
+      else if (InRoleAccount[role] == InRoleAccount[2])
+        return 'บัญชีผู้ดูแล';
+      else
+        return InRoleAccount[role];
+    } catch (err) {
+      this.alert.notify('function getRoleName : ' + err.Message);
+      console.log(`function getRoleName : ` + err.Message);
+    }
   }
 }

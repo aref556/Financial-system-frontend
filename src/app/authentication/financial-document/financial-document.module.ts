@@ -5,6 +5,7 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { SharedsModule } from 'src/app/shareds/shareds.module';
 import { MessageMemosComponent } from './components/message-memos/message-memos.component';
+import { AuthenticationModule } from '../authentication.module';
 // import { AuthenticationRouting } from '../authentication.routing';
 
 

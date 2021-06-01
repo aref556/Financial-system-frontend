@@ -53,15 +53,15 @@ html {
   font-family: 'Mali', cursive;
   /* font-family: sans-serif; */
   line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
+  /* -webkit-text-size-adjust: 100%; */
+  /* -ms-text-size-adjust: 100%; */
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
 }
 
-@-ms-viewport {
+/* @-ms-viewport {
   width: device-width;
-}
+} */
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
@@ -1973,7 +1973,7 @@ pre code {
   line-height: 1.5;
   color: #495057;
   background-color: #FFF;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   border: 2px solid #ced4da;
   border-radius: 4px;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -3225,7 +3225,7 @@ tbody.collapse.show {
   text-align: left;
   list-style: none;
   background-color: #FFF;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   border: 0 solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
@@ -4499,7 +4499,7 @@ tbody.collapse.show {
   min-width: 0;
   word-wrap: break-word;
   background-color: #FFF;
-  background-clip: border-box;
+  /* background-clip: border-box; */
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
@@ -5525,7 +5525,7 @@ button.close {
   width: 100%;
   pointer-events: auto;
   background-color: #FFF;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
@@ -5767,7 +5767,7 @@ button.close {
   font-size: 0.765625rem;
   word-wrap: break-word;
   background-color: #FFF;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
 }
@@ -10193,7 +10193,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   border-radius: 5px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   *border-right-width: 2px;
   *border-bottom-width: 2px;
   color: #333333;
@@ -10291,7 +10291,7 @@ body.stop-scrolling {
   overflow: hidden;
   padding: 0 10px;
   max-height: 0;
-  webkit-transition: padding 0.15s, max-height 0.15s;
+  /* webkit-transition: padding 0.15s, max-height 0.15s; */
   -webkit-transition: padding 0.15s, max-height 0.15s;
   -o-transition: padding 0.15s, max-height 0.15s;
   transition: padding 0.15s, max-height 0.15s;
@@ -10300,7 +10300,7 @@ body.stop-scrolling {
 .sweet-alert .sa-error-container.show {
   padding: 10px 0;
   max-height: 100px;
-  webkit-transition: padding 0.2s, max-height 0.2s;
+  /* webkit-transition: padding 0.2s, max-height 0.2s; */
   -webkit-transition: padding 0.25s, max-height 0.25s;
   -o-transition: padding 0.25s, max-height 0.25s;
   transition: padding 0.25s, max-height 0.25s;
@@ -13848,7 +13848,7 @@ be a descendant of the grid when it is being dragged.
 .animated-checkbox input[type="checkbox"] + .label-text:before {
   content: "";
   font-family: "FontAwesome";
-  speak: none;
+  /* speak: none; */
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -13893,7 +13893,7 @@ be a descendant of the grid when it is being dragged.
 .animated-radio-button input[type="radio"] + .label-text:before {
   content: "";
   font-family: "FontAwesome";
-  speak: none;
+  /* speak: none; */
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -13973,7 +13973,7 @@ be a descendant of the grid when it is being dragged.
 .toggle input[type="checkbox"] + .button-indecator:before {
   content: "";
   font-family: "FontAwesome";
-  speak: none;
+  /* speak: none; */
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

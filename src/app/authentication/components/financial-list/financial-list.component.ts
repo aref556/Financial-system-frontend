@@ -55,7 +55,7 @@ export class FinancialListComponent implements InFinancialListComponent {
   ];
   // ตัวแปร pagination
   startPage: number = 1;
-  limitPage: number = 10;
+  limitPage: number = 20;
 
   //ตรวจสอบสิทธ์ผู้ใช้งาน
   UserLogin: InAccount;
@@ -63,46 +63,74 @@ export class FinancialListComponent implements InFinancialListComponent {
 
   //เปลี่ยนหน้า pagination
   onPageChanged(page: PageChangedEvent) {
-    this.initialLoadDocuments({
-      searchText: this.getSearchText,
-      searchType: this.searchType.key,
-      startPage: page.page,
-      limitPage: page.itemsPerPage
-    });
+    try {
+      this.initialLoadDocuments({
+        searchText: this.getSearchText,
+        searchType: this.searchType.key,
+        startPage: page.page,
+        limitPage: page.itemsPerPage
+      });
+
+    } catch (err) {
+      this.alert.notify('function onPageChanged: ' + err.Message);
+      console.log('function onPageChanged: ' + err.Message);
+    }
+
   }
 
   // ค้นหาข้อมูล
   onSearchItem(): void {
-    this.startPage = 1;
-    this.initialLoadDocuments({
-      searchText: this.getSearchText,
-      searchType: this.searchType.key,
-      startPage: this.startPage,
-      limitPage: this.limitPage
-    });
-    //กระตุ้น Event
-    this.detect.detectChanges();
+    try {
+      this.startPage = 1;
+      this.initialLoadDocuments({
+        searchText: this.getSearchText,
+        searchType: this.searchType.key,
+        startPage: this.startPage,
+        limitPage: this.limitPage
+      });
+      //กระตุ้น Event
+      this.detect.detectChanges();
+    } catch (err) {
+      this.alert.notify(`function onSearchItem: ` + err.Message);
+      console.log(`function onSearchItem: ` + err.Message);
+    }
+
   }
 
   //แสดงชื่อสิทธิ์ผู้ใช้งาน
   getTypeName(role: InRoleDocument) {
-    if (InRoleDocument[role] == InRoleDocument[1])
-      return 'ใบแจ้งหนี้';
-    else if (InRoleDocument[role] == InRoleDocument[2])
-      return 'เอกสารใบแจ้งหนี้';
-    else if (InRoleDocument[role] == InRoleDocument[3])
-      return 'ใบส่งของ';
-    else if (InRoleDocument[role] == InRoleDocument[4])
-      return 'บันทึกข้อความ';
-    else
-      return InRoleDocument[role];
+    try {
+      if (InRoleDocument[role] == InRoleDocument[1])
+        return 'ใบแจ้งหนี้';
+      else if (InRoleDocument[role] == InRoleDocument[2])
+        return 'เอกสารใบแจ้งหนี้';
+      else if (InRoleDocument[role] == InRoleDocument[3])
+        return 'ใบส่งของ';
+      else if (InRoleDocument[role] == InRoleDocument[4])
+        return 'บันทึกข้อความ';
+      else
+        return InRoleDocument[role];
+    } catch (err) {
+      this.alert.notify(`function getTypeName: ` + err.Message);
+      console.log(`function getTypeName: ` + err.Message);
+    }
+
   }
 
   getFlagStatus(role: InFlagStatus) {
-    if (InFlagStatus[role] == InFlagStatus[1])
-      return 'กำลังดำเนินการ';
-    if (InFlagStatus[role] == InFlagStatus[2])
-      return 'ดำเนินการเสร็จสิ้น';
+    try {
+      if (InFlagStatus[role] == InFlagStatus[1])
+        return 'กำลังดำเนินการ';
+      else if (InFlagStatus[role] == InFlagStatus[2])
+        return 'ดำเนินการเสร็จสิ้น';
+      else
+        return InFlagStatus[role];
+
+    } catch (err) {
+      this.alert.notify(`function getFlagName: ` + err.Message);
+      console.log(`function getFlagname: ` + err.Message);
+    }
+
   }
 
   onDeleteDocument(item: InDocument): void {
@@ -125,10 +153,10 @@ export class FinancialListComponent implements InFinancialListComponent {
   }
 
   async onLookDocument(item: InDocument) {
-    const doc = await this.document.getDocumentById(item.id);
-    const doc_string = JSON.stringify(doc);
-    const doc_object = JSON.parse(doc_string);
     try {
+      const doc = await this.document.getDocumentById(item.id);
+      const doc_string = JSON.stringify(doc);
+      const doc_object = JSON.parse(doc_string);
       if (doc.type == 1) {
         // const docInvoice: InInvoice = doc_object;
         await this.pdf.generateInvoice(doc_object as InInvoice);
@@ -159,26 +187,32 @@ export class FinancialListComponent implements InFinancialListComponent {
   }
 
   private get getSearchText() {
-    let responseSearchText = null;
-    switch (this.searchType.key) {
-      case 'type':
-        responseSearchText = InRoleDocument[this.searchText] || '';
-        break;
-      case 'updated':
-        const searchDate: { from: Date, to: Date } = { from: this.searchText[0], to: this.searchText[1] } as any;
-        searchDate.from.setHours(0);
-        searchDate.from.setMinutes(0);
-        searchDate.from.setSeconds(0);
-        searchDate.to.setHours(23);
-        searchDate.to.setMinutes(59);
-        searchDate.to.setSeconds(59);
-        responseSearchText = searchDate;
-        break;
-      default:
-        responseSearchText = this.searchText;
-        break;
+    try {
+      let responseSearchText = null;
+      switch (this.searchType.key) {
+        case 'type':
+          responseSearchText = InRoleDocument[this.searchText] || '';
+          break;
+        case 'updated':
+          const searchDate: { from: Date, to: Date } = { from: this.searchText[0], to: this.searchText[1] } as any;
+          searchDate.from.setHours(0);
+          searchDate.from.setMinutes(0);
+          searchDate.from.setSeconds(0);
+          searchDate.to.setHours(23);
+          searchDate.to.setMinutes(59);
+          searchDate.to.setSeconds(59);
+          responseSearchText = searchDate;
+          break;
+        default:
+          responseSearchText = this.searchText;
+          break;
+      }
+      return responseSearchText;
+
+    } catch (err) {
+      this.alert.notify(err.Message)
     }
-    return responseSearchText;
+
   }
 
 
