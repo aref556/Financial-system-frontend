@@ -21,6 +21,7 @@ export interface InInvoice {
     // address_target:string;
     // condition_prize: string;
     //ตัวแปรหลัก
+    id_doc: string;
     address: string;
     payment_due: number;
     guarantee: number;

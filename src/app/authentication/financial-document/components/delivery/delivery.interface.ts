@@ -13,6 +13,7 @@ export interface InDeliveryComponent {
 }
 
 export interface InDelivery {
+    id_doc: string;
     date: string;
     address: string;
     payment_due: number;
