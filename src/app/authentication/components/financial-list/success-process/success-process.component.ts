@@ -5,6 +5,7 @@ import { FinancialDocumentService } from 'src/app/authentication/services/financ
 import { AuthenService } from 'src/app/services/authen.service';
 import { AccountService } from 'src/app/shareds/services/account.service';
 import { AlertService } from 'src/app/shareds/services/alert.service';
+import { InDocumentSearch } from '../financial-list.interface';
 import { InSuccessProcessComponent } from './success-process.interface';
 
 @Component({
@@ -51,6 +52,17 @@ export class SuccessProcessComponent implements InSuccessProcessComponent {
       success_id_doc: ['', Validators.required],
       note: ['', Validators.required],
     })
+  }
+
+  // โหลดข้อมูลเอกสาร
+  private initialLoadDocuments(options?: InDocumentSearch) {
+    this.document
+      .getDocuments(options)
+      .then(items => {
+        this.items = items;
+        // console.log(this.items);
+      })
+      .catch(err => this.alert.notify(`initialLoadDoc: ` + err.Message));
   }
 
 
