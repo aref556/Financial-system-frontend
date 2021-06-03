@@ -14,4 +14,5 @@ export interface InModalChangePasswordComponent {
 export interface InModalChangePassword {
     origin_pass: string;
     new_pass: string;
+    cnew_pass: string;
 }

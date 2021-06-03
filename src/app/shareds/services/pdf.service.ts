@@ -22,81 +22,88 @@ export class PdfService {
     }
 
     async convertMount(m: string) {
-        if (m == '1' || m == '01') {
-            return 'มกราคม';
-        }
-        if (m == '2' || m == '02') {
-            return 'กุมภาพันธ์';
-        }
-        if (m == '3' || m == '03') {
-            return 'มีนาคม';
-        }
-        if (m == '4' || m == '04') {
-            return 'เมษายน';
-        }
-        if (m == '5' || m == '05') {
-            return 'พฤษภาคม';
-        }
-        if (m == '6' || m == '06') {
-            return 'มิถุนายน';
-        }
-        if (m == '7' || m == '07') {
-            return 'กรกฎาคม';
-        }
-        if (m == '8' || m == '08') {
-            return 'สิงหาคม';
-        }
-        if (m == '9' || m == '09') {
-            return 'กันยายน';
-        }
-        if (m == '10') {
-            return 'ตุลาคม';
-        }
-        if (m == '11') {
-            return 'พฤศจิกายน';
-        }
-        if (m == '12') {
-            return 'ธันวาคม';
-        }
-        else {
+        try {
+            if (m == '1' || m == '01') {
+                return 'มกราคม';
+            }
+            if (m == '2' || m == '02') {
+                return 'กุมภาพันธ์';
+            }
+            if (m == '3' || m == '03') {
+                return 'มีนาคม';
+            }
+            if (m == '4' || m == '04') {
+                return 'เมษายน';
+            }
+            if (m == '5' || m == '05') {
+                return 'พฤษภาคม';
+            }
+            if (m == '6' || m == '06') {
+                return 'มิถุนายน';
+            }
+            if (m == '7' || m == '07') {
+                return 'กรกฎาคม';
+            }
+            if (m == '8' || m == '08') {
+                return 'สิงหาคม';
+            }
+            if (m == '9' || m == '09') {
+                return 'กันยายน';
+            }
+            if (m == '10') {
+                return 'ตุลาคม';
+            }
+            if (m == '11') {
+                return 'พฤศจิกายน';
+            }
+            if (m == '12') {
+                return 'ธันวาคม';
+            }
+
+        } catch (err) {
+            console.log(`function convertMount : ` + err.Message);
             this.alert.notify('พบข้อผิดพลาดบางอย่าง');
             return 'พบข้อผิดพลาดบางอย่าง'
         }
+
+
+
+
     }
 
     async loadPdfMaker() {
-        try {
-            if (!this.pdfMake) {
-                const pdfMakeModule = await import('pdfmake-thai/build/pdfmake');
-                const pdfFontsModule = await import('pdfmake-thai/build/vfs_fonts');
-                this.pdfMake = pdfMakeModule.default;
-                this.pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
-                this.pdfMake.fonts = {
-                    Roboto: {
-                        normal: 'Roboto-Regular.ttf',
-                        bold: 'Roboto-Medium.ttf',
-                        italics: 'Roboto-Italic.ttf',
-                        bolditalics: 'Roboto-MediumItalic.ttf',
-                    },
-                    Sarabun: {
-                        normal: "THSarabunNew.ttf",
-                        bold: "THSarabunNew-Bold.ttf",
-                        italics: "THSarabunNew-Italic.ttf",
-                        bolditalics: "THSarabunNew-BoldItalic.ttf",
-                    },
-                    PSU: {
-                        // normal: "DB ChuanPim PSU Li v3.2.1.ttf",
-                        normal: "DB ChuanPim PSU v3.2.1.ttf",
-                        // normal:"DB ChuanPim PSU Demi v3.2.1.ttf",
-                        bold: "DB ChuanPim PSU Bd v3.2.1.ttf",
-                        italics: "DB ChuanPim PSU Bd It v3.2.1.ttf",
-                        bolditalics: "DB ChuanPim PSU Bd It v3.2.1.ttf",
-                    }
+        // try {
+        if (!this.pdfMake) {
+            const pdfMakeModule = await import('pdfmake-thai/build/pdfmake');
+            const pdfFontsModule = await import('pdfmake-thai/build/vfs_fonts');
+            this.pdfMake = pdfMakeModule.default;
+            this.pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
+            this.pdfMake.fonts = {
+                Roboto: {
+                    normal: 'Roboto-Regular.ttf',
+                    bold: 'Roboto-Medium.ttf',
+                    italics: 'Roboto-Italic.ttf',
+                    bolditalics: 'Roboto-MediumItalic.ttf',
+                },
+                Sarabun: {
+                    normal: "THSarabunNew.ttf",
+                    bold: "THSarabunNew-Bold.ttf",
+                    italics: "THSarabunNew-Italic.ttf",
+                    bolditalics: "THSarabunNew-BoldItalic.ttf",
+                },
+                PSU: {
+                    // normal: "DB ChuanPim PSU Li v3.2.1.ttf",
+                    normal: "DB ChuanPim PSU v3.2.1.ttf",
+                    // normal:"DB ChuanPim PSU Demi v3.2.1.ttf",
+                    bold: "DB ChuanPim PSU Bd v3.2.1.ttf",
+                    italics: "DB ChuanPim PSU Bd It v3.2.1.ttf",
+                    bolditalics: "DB ChuanPim PSU Bd It v3.2.1.ttf",
                 }
             }
-        } catch (err) {
-            return this.alert.notify(`function loadPdfMaker : ` + err.Message)
         }
+        // } catch (err) {
+        //     return this.alert.notify(`function loadPdfMaker : ` + err.Message)
+        // }
 
     }
 
@@ -121,1547 +128,1564 @@ export class PdfService {
     //สร้างใบส่งของ
     async generateDelivery(model: InDelivery) {
         await this.loadPdfMaker();
-        try {
-            let position = model.forwarder_position.split(' ');
-            // console.log(position);
+        if (model.date == '' || model.date == ' ' || model.date == null) {
+            this.alert.notify(`กรุณากรอกวันที่ให้ถูกต้อง`);
+            return false;
+        }
+        // try {
+        let position = model.forwarder_position.split(' ');
+        // console.log(position);
 
-            // แปลงวันที่เป็น วันที่พุทธศักราช
-            let date = model.date.split("-");
-            let y_eng = parseInt(date[0]);
-            let y_th = y_eng + 543;
-            let yy = y_th.toString();
-            let m = date[1].toString();
-            let mm = await this.convertMount(m);
-            let dd = date[2].toString();
-            // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
-            let str_date = dd + ' ' + mm + ' ' + yy + ' ';
+        // แปลงวันที่เป็น วันที่พุทธศักราช
+        let date = model.date.split("-");
+        let y_eng = parseInt(date[0]);
+        let y_th = y_eng + 543;
+        let yy = y_th.toString();
+        let m = date[1].toString();
+        let mm = await this.convertMount(m);
+        let dd = date[2].toString();
+        // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
+        let str_date = dd + ' ' + mm + ' ' + yy + ' ';
 
-            //รวมจำนวนเงิน
-            // console.log('detail2:' + typeof model.product_detail_2 + '\n number2: ' + model.product_number_2 + '\n product2: ' + model.product_prize_2);
-            let product_prize_1 = model.product_prize_1.toFixed(2);
-            let total_money_th_1 = (parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)).toFixed(2);
-            let total_money = total_money_th_1;
-            //แปลงจำนวนเงินเป็นตัวหนังสือ
-            let thaibath = ArabicNumberToText(total_money);
+        //รวมจำนวนเงิน
+        // console.log('detail2:' + typeof model.product_detail_2 + '\n number2: ' + model.product_number_2 + '\n product2: ' + model.product_prize_2);
+        let product_prize_1 = model.product_prize_1.toFixed(2);
+        let total_money_th_1 = (parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)).toFixed(2);
+        let total_money = total_money_th_1;
+        //แปลงจำนวนเงินเป็นตัวหนังสือ
+        let thaibath = ArabicNumberToText(total_money);
 
-            if (
-                model.product_detail_2 != '' ||
-                model.product_number_2 != null ||
-                model.product_prize_2 != null
-            ) {
-                let product_prize_2 = model.product_prize_2.toFixed(2);
-                let total_money_th_2 = (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`)).toFixed(2);
-                let total_money_th = ((parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)) + (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`))).toFixed(2);
-                total_money = total_money_th;
-                thaibath = ArabicNumberToText(total_money);
-                var docDefinition = {
-                    content: [
-                        {
-                            text: 'ใบส่งของ \n',
-                            font: 'PSU',
-                            bold: true,
-                            fontSize: 22,
-                            alignment: 'center',
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: '70%',
-                                    text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
+        if (
+            model.product_detail_2 != '' ||
+            model.product_number_2 != null ||
+            model.product_prize_2 != null
+        ) {
+            let product_prize_2 = model.product_prize_2.toFixed(2);
+            let total_money_th_2 = (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`)).toFixed(2);
+            let total_money_th = ((parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)) + (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`))).toFixed(2);
+            total_money = total_money_th;
+            thaibath = ArabicNumberToText(total_money);
+            var docDefinition = {
+                content: [
+                    {
+                        text: 'ใบส่งของ \n',
+                        font: 'PSU',
+                        bold: true,
+                        fontSize: 22,
+                        alignment: 'center',
+                    },
+                    {
+                        columns: [
+                            {
+                                width: '70%',
+                                text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
                                 15 ถนนกาญจนวณิชย์ ตำบลหาดใหญ่ อำเภอหาดใหญ่
                                 จังหวัดสงขลา 90110 
                                 โทร. 0-7428-2102, 0-7428-2073 โทรสาร 074 282 111 
                                 อีเมล : naowarat.s@psu.ac.th, orathai.b@psu.ac.th`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 40,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 40,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
 
-                                // },
-                                {
-                                    width: '30%',
-                                    text: `เลขที่ \t 1/2564 \n วันที่ ${str_date}`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            // columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            // style: 'tableExample',
-                            table: {
-                                headerRows: 1,
-                                // heights: ['*', 100, '*'],
-                                widths: [231, 222],
-                                // dontBreakRows: true,
-                                // keepWithHeaderRows: 1,
-                                body: [
-                                    // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
-                                    [
-                                        // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        {
-                                            text: [
-                                                {
-                                                    text: 'ที่อยู่ ',
-                                                    font: 'PSU',
-                                                    fontSize: 16,
-                                                    bold: true
-                                                },
-                                                {
-                                                    text: `${model.address}`,
-                                                    font: 'PSU',
-                                                    fontSize: 16
-                                                },
-                                            ]
-                                        },
-                                        [
+                            // },
+                            {
+                                width: '30%',
+                                text: `เลขที่ \t 1/2564 \n วันที่ ${str_date}`,
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
+                        ],
+                        // columnGap: 10,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        // style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            // heights: ['*', 100, '*'],
+                            widths: [231, 222],
+                            // dontBreakRows: true,
+                            // keepWithHeaderRows: 1,
+                            body: [
+                                // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
+                                [
+                                    // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    {
+                                        text: [
                                             {
-                                                text: 'เงื่อนไขการเสนอราคา \t',
+                                                text: 'ที่อยู่ ',
                                                 font: 'PSU',
                                                 fontSize: 16,
                                                 bold: true
                                             },
                                             {
-                                                text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            {
-                                                text: `กำหนดยืนราคา \t ${model.prize_stand} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            {
-                                                text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                                text: `${model.address}`,
                                                 font: 'PSU',
                                                 fontSize: 16
                                             },
                                         ]
-
-
+                                    },
+                                    [
+                                        {
+                                            text: 'เงื่อนไขการเสนอราคา \t',
+                                            font: 'PSU',
+                                            fontSize: 16,
+                                            bold: true
+                                        },
+                                        {
+                                            text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        {
+                                            text: `กำหนดยืนราคา \t ${model.prize_stand} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        {
+                                            text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
                                     ]
-                                ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: ['*', 100, 100, '*'],
-                                widths: [231, 52, 76, 76],
-                                body: [
-                                    [
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รายละเอียดสินค้า',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'จำนวนเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'ราคาต่อหน่วย',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รวมเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                    ],
-                                    [
-                                        {
-                                            text: `1. ${model.product_detail_1}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_1.toString())}`,
-                                            style: 'text_normal',
 
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_1)}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_1)}`,
-                                            style: 'text_normal',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `2. ${model.product_detail_2}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_2.toString())}`,
-                                            style: 'text_normal',
-
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_2)}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_2)}`,
-                                            style: 'text_normal',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `(${thaibath})`,
-                                            style: 'text_normal',
-                                            colSpan: 3,
-                                            alignment: 'left',
-                                        },
-                                        {},
-                                        {},
-                                        {
-                                            text: `${addCommas(total_money)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        }
-                                    ],
 
                                 ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: [100],
-                                widths: [462],
-                                body: [
-                                    [
-                                        [
-                                            {
-                                                columns: [
-                                                    {
-                                                        width: '55%',
-                                                        text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
-                                                        style: 'text_normal',
-                                                    },
-                                                    {
-                                                        width: '*',
-                                                        text: [
-                                                            {
-                                                                text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
-                                                                style: 'text_normal',
-                                                            },
-                                                            {
-                                                                text: `\n \u200b \t    ${position[0]} `,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                            {
-                                                                text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                        ],
+                            ]
+                        }
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: ['*', 100, 100, '*'],
+                            widths: [231, 52, 76, 76],
+                            body: [
+                                [
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รายละเอียดสินค้า',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'จำนวนเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'ราคาต่อหน่วย',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รวมเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                ],
+                                [
+                                    {
+                                        text: `1. ${model.product_detail_1}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_1.toString())}`,
+                                        style: 'text_normal',
 
-                                                    },
-                                                ],
-                                                columnGap: 0,
-                                            },
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_1)}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_1)}`,
+                                        style: 'text_normal',
 
-                                        ]
-                                    ],
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `2. ${model.product_detail_2}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_2.toString())}`,
+                                        style: 'text_normal',
 
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_2)}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_2)}`,
+                                        style: 'text_normal',
 
-
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `(${thaibath})`,
+                                        style: 'text_normal',
+                                        colSpan: 3,
+                                        alignment: 'left',
+                                    },
+                                    {},
+                                    {},
+                                    {
+                                        text: `${addCommas(total_money)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    }
                                 ],
 
-                            },
+                            ]
                         }
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    width: 595.3,
-                    height: 841.9,
-                    // [left, top, right, bottom]
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 19.85, 72, 45.35],
-                    styles: {
-                        text_normal: {
-                            fontSize: 16,
-                            font: 'PSU',
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: [100],
+                            widths: [462],
+                            body: [
+                                [
+                                    [
+                                        {
+                                            columns: [
+                                                {
+                                                    width: '55%',
+                                                    text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
+                                                    style: 'text_normal',
+                                                },
+                                                {
+                                                    width: '*',
+                                                    text: [
+                                                        {
+                                                            text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
+                                                            style: 'text_normal',
+                                                        },
+                                                        {
+                                                            text: `\n \u200b \t    ${position[0]} `,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                        {
+                                                            text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                    ],
+
+                                                },
+                                            ],
+                                            columnGap: 0,
+                                        },
+
+                                    ]
+                                ],
+
+
+
+                            ],
+
                         },
-                        text_bole: {
-                            fontSize: 16,
-                            font: 'PSU',
-                            bold: true,
-                        }
                     }
-                };
-            }
-            else {
-                var docDefinition = {
-                    content: [
-                        {
-                            text: 'ใบส่งของ \n',
-                            font: 'PSU',
-                            bold: true,
-                            fontSize: 22,
-                            alignment: 'center',
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: '70%',
-                                    text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
+                ],
+                pageSize: 'A4',
+                pageOrientation: 'portrait',
+                width: 595.3,
+                height: 841.9,
+                // [left, top, right, bottom]
+                // pageMargins: [31.7, 10, 25, 10],
+                pageMargins: [89.85, 19.85, 72, 45.35],
+                styles: {
+                    text_normal: {
+                        fontSize: 16,
+                        font: 'PSU',
+                    },
+                    text_bole: {
+                        fontSize: 16,
+                        font: 'PSU',
+                        bold: true,
+                    }
+                }
+            };
+        }
+        else {
+            var docDefinition = {
+                content: [
+                    {
+                        text: 'ใบส่งของ \n',
+                        font: 'PSU',
+                        bold: true,
+                        fontSize: 22,
+                        alignment: 'center',
+                    },
+                    {
+                        columns: [
+                            {
+                                width: '70%',
+                                text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
                                 15 ถนนกาญจนวณิชย์ ตำบลหาดใหญ่ อำเภอหาดใหญ่
                                 จังหวัดสงขลา 90110 
                                 โทร. 0-7428-2102, 0-7428-2073 โทรสาร 074 282 111 
                                 อีเมล : naowarat.s@psu.ac.th, orathai.b@psu.ac.th`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 40,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 40,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
 
-                                // },
-                                {
-                                    width: '30%',
-                                    text: `เลขที่ \t 1/2564 \n วันที่ ${str_date}`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            // columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            // style: 'tableExample',
-                            table: {
-                                headerRows: 1,
-                                // heights: ['*', 100, '*'],
-                                widths: [231, 222],
-                                // dontBreakRows: true,
-                                // keepWithHeaderRows: 1,
-                                body: [
-                                    // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
-                                    [
-                                        // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        {
-                                            text: [
-                                                {
-                                                    text: 'ที่อยู่ ',
-                                                    font: 'PSU',
-                                                    fontSize: 16,
-                                                    bold: true
-                                                },
-                                                {
-                                                    text: `${model.address}`,
-                                                    font: 'PSU',
-                                                    fontSize: 16
-                                                },
-                                            ]
-                                        },
-                                        [
+                            // },
+                            {
+                                width: '30%',
+                                text: `เลขที่ \t 1/2564 \n วันที่ ${str_date}`,
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
+                        ],
+                        // columnGap: 10,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        // style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            // heights: ['*', 100, '*'],
+                            widths: [231, 222],
+                            // dontBreakRows: true,
+                            // keepWithHeaderRows: 1,
+                            body: [
+                                // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
+                                [
+                                    // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    {
+                                        text: [
                                             {
-                                                text: 'เงื่อนไขการเสนอราคา \t',
+                                                text: 'ที่อยู่ ',
                                                 font: 'PSU',
                                                 fontSize: 16,
                                                 bold: true
                                             },
                                             {
-                                                text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            {
-                                                text: `กำหนดยืนราคา \t ${model.prize_stand} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            {
-                                                text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                                text: `${model.address}`,
                                                 font: 'PSU',
                                                 fontSize: 16
                                             },
                                         ]
-
-
+                                    },
+                                    [
+                                        {
+                                            text: 'เงื่อนไขการเสนอราคา \t',
+                                            font: 'PSU',
+                                            fontSize: 16,
+                                            bold: true
+                                        },
+                                        {
+                                            text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        {
+                                            text: `กำหนดยืนราคา \t ${model.prize_stand} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        {
+                                            text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
                                     ]
-                                ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: ['*', 200, '*'],
-                                widths: [231, 52, 76, 76],
-                                body: [
-                                    [
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รายละเอียดสินค้า',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'จำนวนเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'ราคาต่อหน่วย',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รวมเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                    ],
-                                    [
-                                        {
-                                            text: `${model.product_detail_1}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_1.toString())}`,
-                                            style: 'text_normal',
 
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_1)}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_1)}`,
-                                            style: 'text_normal',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `(${thaibath})`,
-                                            style: 'text_normal',
-                                            colSpan: 3,
-                                            alignment: 'left',
-                                        },
-                                        {},
-                                        {},
-                                        {
-                                            text: `${addCommas(total_money)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        }
-                                    ],
 
                                 ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: [100],
-                                widths: [462],
-                                body: [
-                                    [
-                                        [
-                                            {
-                                                columns: [
-                                                    {
-                                                        width: '55%',
-                                                        text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
-                                                        style: 'text_normal',
-                                                    },
-                                                    {
-                                                        width: '*',
-                                                        text: [
-                                                            {
-                                                                text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
-                                                                style: 'text_normal',
-                                                            },
-                                                            {
-                                                                text: `\n \u200b \t    ${position[0]} `,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                            {
-                                                                text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                        ],
+                            ]
+                        }
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: ['*', 200, '*'],
+                            widths: [231, 52, 76, 76],
+                            body: [
+                                [
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รายละเอียดสินค้า',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'จำนวนเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'ราคาต่อหน่วย',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รวมเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                ],
+                                [
+                                    {
+                                        text: `${model.product_detail_1}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_1.toString())}`,
+                                        style: 'text_normal',
 
-                                                    },
-                                                ],
-                                                columnGap: 0,
-                                            },
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_1)}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_1)}`,
+                                        style: 'text_normal',
 
-                                        ]
-                                    ],
-
-
-
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `(${thaibath})`,
+                                        style: 'text_normal',
+                                        colSpan: 3,
+                                        alignment: 'left',
+                                    },
+                                    {},
+                                    {},
+                                    {
+                                        text: `${addCommas(total_money)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    }
                                 ],
 
-                            },
+                            ]
                         }
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    width: 595.3,
-                    height: 841.9,
-                    // [left, top, right, bottom]
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 19.85, 72, 45.35],
-                    styles: {
-                        text_normal: {
-                            fontSize: 16,
-                            font: 'PSU',
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: [100],
+                            widths: [462],
+                            body: [
+                                [
+                                    [
+                                        {
+                                            columns: [
+                                                {
+                                                    width: '55%',
+                                                    text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
+                                                    style: 'text_normal',
+                                                },
+                                                {
+                                                    width: '*',
+                                                    text: [
+                                                        {
+                                                            text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
+                                                            style: 'text_normal',
+                                                        },
+                                                        {
+                                                            text: `\n \u200b \t    ${position[0]} `,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                        {
+                                                            text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                    ],
+
+                                                },
+                                            ],
+                                            columnGap: 0,
+                                        },
+
+                                    ]
+                                ],
+
+
+
+                            ],
+
                         },
-                        text_bole: {
-                            fontSize: 16,
-                            font: 'PSU',
-                            bold: true,
-                        }
                     }
-                };
-
-            }
-
-            this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
-            this.pdfMake.createPdf(docDefinition).open();
-
-        } catch (err) {
-            this.alert.notify(`function generateDelivery : ` + err.Message);
+                ],
+                pageSize: 'A4',
+                pageOrientation: 'portrait',
+                width: 595.3,
+                height: 841.9,
+                // [left, top, right, bottom]
+                // pageMargins: [31.7, 10, 25, 10],
+                pageMargins: [89.85, 19.85, 72, 45.35],
+                styles: {
+                    text_normal: {
+                        fontSize: 16,
+                        font: 'PSU',
+                    },
+                    text_bole: {
+                        fontSize: 16,
+                        font: 'PSU',
+                        bold: true,
+                    }
+                }
+            };
 
         }
+
+        this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
+        this.pdfMake.createPdf(docDefinition).open();
+
+        // } catch (err) {
+        //     this.alert.notify(`function generateDelivery : ` + err.Message);
+
+        // }
 
     }
 
     // สร้างใบแจ้งหนี้
     async generateInvoice(model: InInvoice) {
-        try {
-            // console.log(model.forwarder);
-            // console.log(model.forwarder_position);
-            let position = model.forwarder_position.split(' ');
-            await this.loadPdfMaker();
-            // แปลงวันที่เป็น วันที่พุทธศักราช
-            let date = model.date.split("-");
-            let y_eng = parseInt(date[0]);
-            let y_th = y_eng + 543;
-            let yy = y_th.toString();
-            let m = date[1].toString();
-            let mm = await this.convertMount(m);
-            let dd = date[2].toString();
-            // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
-            let str_date = dd + ' ' + mm + ' ' + yy + ' ';
+        if (model.date == '' || model.date == ' ' || model.date == null) {
+            this.alert.notify(`กรุณากรอกวันที่ให้ถูกค้อง`);
+            return false;
+        }
+        // try {
+        // console.log(model.forwarder);
+        // console.log(model.forwarder_position);
+        let position = model.forwarder_position.split(' ');
+        await this.loadPdfMaker();
+        // แปลงวันที่เป็น วันที่พุทธศักราช
+        let date = model.date.split("-");
+        let y_eng = parseInt(date[0]);
+        let y_th = y_eng + 543;
+        let yy = y_th.toString();
+        let m = date[1].toString();
+        let mm = await this.convertMount(m);
+        let dd = date[2].toString();
+        // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
+        let str_date = dd + ' ' + mm + ' ' + yy + ' ';
 
-            //รวมจำนวนเงิน
-            // console.log('detail2:' + typeof model.product_detail_2 + '\n number2: ' + model.product_number_2 + '\n product2: ' + model.product_prize_2);
-            let product_prize_1 = model.product_prize_1.toFixed(2);
-            let total_money_th_1 = (parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)).toFixed(2);
-            let total_money = total_money_th_1;
-            //แปลงจำนวนเงินเป็นตัวหนังสือ
-            let thaibath = ArabicNumberToText(total_money);
+        //รวมจำนวนเงิน
+        // console.log('detail2:' + typeof model.product_detail_2 + '\n number2: ' + model.product_number_2 + '\n product2: ' + model.product_prize_2);
+        let product_prize_1 = model.product_prize_1.toFixed(2);
+        let total_money_th_1 = (parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)).toFixed(2);
+        let total_money = total_money_th_1;
+        //แปลงจำนวนเงินเป็นตัวหนังสือ
+        let thaibath = ArabicNumberToText(total_money);
 
-            if (
-                model.product_detail_2 != '' ||
-                model.product_number_2 != null ||
-                model.product_prize_2 != null
-            ) {
-                // console.log('2 มีค่า');
-                let product_prize_2 = model.product_prize_2.toFixed(2);
-                let total_money_th_2 = (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`)).toFixed(2);
-                let total_money_th = ((parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)) + (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`))).toFixed(2);
-                total_money = total_money_th;
-                thaibath = ArabicNumberToText(total_money);
-                var docDefinition = {
-                    content: [
-                        {
-                            text: 'ใบแจ้งหนี้ \n',
-                            font: 'PSU',
-                            bold: true,
-                            fontSize: 22,
-                            alignment: 'center',
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: '70%',
-                                    text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
+        if (
+            model.product_detail_2 != '' ||
+            model.product_number_2 != null ||
+            model.product_prize_2 != null
+        ) {
+            // console.log('2 มีค่า');
+            let product_prize_2 = model.product_prize_2.toFixed(2);
+            let total_money_th_2 = (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`)).toFixed(2);
+            let total_money_th = ((parseFloat(`${model.product_number_1}`) * parseFloat(`${model.product_prize_1}`)) + (parseFloat(`${model.product_number_2}`) * parseFloat(`${model.product_prize_2}`))).toFixed(2);
+            total_money = total_money_th;
+            thaibath = ArabicNumberToText(total_money);
+            var docDefinition = {
+                content: [
+                    {
+                        text: 'ใบแจ้งหนี้ \n',
+                        font: 'PSU',
+                        bold: true,
+                        fontSize: 22,
+                        alignment: 'center',
+                    },
+                    {
+                        columns: [
+                            {
+                                width: '70%',
+                                text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
                                 15 ถนนกาญจนวณิชย์ ตำบลหาดใหญ่ อำเภอหาดใหญ่
                                 จังหวัดสงขลา 90110 
                                 โทร. 0-7428-2102, 0-7428-2073 โทรสาร 074 282 111 
                                 อีเมล : naowarat.s@psu.ac.th, orathai.b@psu.ac.th`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 40,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 40,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
 
-                                // },
-                                {
-                                    width: '30%',
-                                    text: `เลขที่ \t 2/2564 \n วันที่ ${str_date}`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            // columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            // style: 'tableExample',
-                            table: {
-                                headerRows: 1,
-                                // heights: ['*', 100, '*'],
-                                widths: [231, 222],
-                                // dontBreakRows: true,
-                                // keepWithHeaderRows: 1,
-                                body: [
-                                    // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
-                                    [
-                                        // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        {
-                                            text: [
-                                                {
-                                                    text: 'ที่อยู่ ',
-                                                    font: 'PSU',
-                                                    fontSize: 16,
-                                                    bold: true
-                                                },
-                                                {
-                                                    text: `${model.address}`,
-                                                    font: 'PSU',
-                                                    fontSize: 16
-                                                },
-                                            ]
-                                        },
-                                        [
+                            // },
+                            {
+                                width: '30%',
+                                text: `เลขที่ \t 2/2564 \n วันที่ ${str_date}`,
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
+                        ],
+                        // columnGap: 10,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        // style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            // heights: ['*', 100, '*'],
+                            widths: [231, 222],
+                            // dontBreakRows: true,
+                            // keepWithHeaderRows: 1,
+                            body: [
+                                // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
+                                [
+                                    // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    {
+                                        text: [
                                             {
-                                                text: 'เงื่อนไขการเสนอราคา \t',
+                                                text: 'ที่อยู่ ',
                                                 font: 'PSU',
                                                 fontSize: 16,
                                                 bold: true
                                             },
                                             {
-                                                text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            // { text: 'กำหนดยืนราคา \t ค่า \t วัน', font: 'PSU', fontSize: 16 },
-                                            {
-                                                text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                                text: `${model.address}`,
                                                 font: 'PSU',
                                                 fontSize: 16
                                             },
                                         ]
-
-
+                                    },
+                                    [
+                                        {
+                                            text: 'เงื่อนไขการเสนอราคา \t',
+                                            font: 'PSU',
+                                            fontSize: 16,
+                                            bold: true
+                                        },
+                                        {
+                                            text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        // { text: 'กำหนดยืนราคา \t ค่า \t วัน', font: 'PSU', fontSize: 16 },
+                                        {
+                                            text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
                                     ]
-                                ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: ['*', 100, 100, '*'],
-                                widths: [231, 52, 76, 76],
-                                body: [
-                                    [
-                                        {
 
-                                            fillColor: '#EEECE1',
-                                            text: 'รายละเอียดสินค้า',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'จำนวน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'ราคาต่อหน่วย',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รวมเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                    ],
-                                    [
-                                        {
-                                            text: `1. ${model.product_detail_1}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_1.toString())}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_1)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_1)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `2. ${model.product_detail_2}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_2.toString())}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_2)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_2)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `(${thaibath})`,
-                                            style: 'text_normal',
-                                            colSpan: 3,
-                                            alignment: 'left',
-                                        },
-                                        {},
-                                        {},
-                                        {
-                                            text: `${addCommas(total_money)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        }
-                                    ],
 
                                 ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: [100],
-                                widths: [462],
-                                body: [
-                                    [
-                                        [
-                                            {
-                                                columns: [
-                                                    {
-                                                        width: '55%',
-                                                        text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
-                                                        style: 'text_normal',
-                                                    },
-                                                    {
-                                                        width: '*',
-                                                        text: [
-                                                            {
-                                                                text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
-                                                                style: 'text_normal',
-                                                            },
-                                                            {
-                                                                text: `\n \u200b \t    ${position[0]} `,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                            {
-                                                                text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                        ],
+                            ]
+                        }
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: ['*', 100, 100, '*'],
+                            widths: [231, 52, 76, 76],
+                            body: [
+                                [
+                                    {
 
-                                                    },
-                                                ],
-                                                columnGap: 0,
-                                            },
+                                        fillColor: '#EEECE1',
+                                        text: 'รายละเอียดสินค้า',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'จำนวน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'ราคาต่อหน่วย',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รวมเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                ],
+                                [
+                                    {
+                                        text: `1. ${model.product_detail_1}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_1.toString())}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
-                                        ]
-                                    ],
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_1)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_1)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `2. ${model.product_detail_2}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_2.toString())}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_2)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_2)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `(${thaibath})`,
+                                        style: 'text_normal',
+                                        colSpan: 3,
+                                        alignment: 'left',
+                                    },
+                                    {},
+                                    {},
+                                    {
+                                        text: `${addCommas(total_money)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    }
                                 ],
 
-                            },
+                            ]
                         }
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    width: 595.3,
-                    height: 841.9,
-                    // [left, top, right, bottom]
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 19.85, 72, 45.35],
-                    styles: {
-                        text_normal: {
-                            fontSize: 16,
-                            font: 'PSU',
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: [100],
+                            widths: [462],
+                            body: [
+                                [
+                                    [
+                                        {
+                                            columns: [
+                                                {
+                                                    width: '55%',
+                                                    text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
+                                                    style: 'text_normal',
+                                                },
+                                                {
+                                                    width: '*',
+                                                    text: [
+                                                        {
+                                                            text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
+                                                            style: 'text_normal',
+                                                        },
+                                                        {
+                                                            text: `\n \u200b \t    ${position[0]} `,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                        {
+                                                            text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                    ],
+
+                                                },
+                                            ],
+                                            columnGap: 0,
+                                        },
+
+                                    ]
+                                ],
+
+
+
+                            ],
+
                         },
-                        text_bole: {
-                            fontSize: 16,
-                            font: 'PSU',
-                            bold: true,
-                        }
                     }
-                };
-            }
-            else {
-                console.log("1 มีค่า 2 ไม่มีค่า");
-                var docDefinition = {
-                    content: [
-                        {
-                            text: 'ใบแจ้งหนี้ \n',
-                            font: 'PSU',
-                            bold: true,
-                            fontSize: 22,
-                            alignment: 'center',
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: '70%',
-                                    text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
+                ],
+                pageSize: 'A4',
+                pageOrientation: 'portrait',
+                width: 595.3,
+                height: 841.9,
+                // [left, top, right, bottom]
+                // pageMargins: [31.7, 10, 25, 10],
+                pageMargins: [89.85, 19.85, 72, 45.35],
+                styles: {
+                    text_normal: {
+                        fontSize: 16,
+                        font: 'PSU',
+                    },
+                    text_bole: {
+                        fontSize: 16,
+                        font: 'PSU',
+                        bold: true,
+                    }
+                }
+            };
+        }
+        else {
+            console.log("1 มีค่า 2 ไม่มีค่า");
+            var docDefinition = {
+                content: [
+                    {
+                        text: 'ใบแจ้งหนี้ \n',
+                        font: 'PSU',
+                        bold: true,
+                        fontSize: 22,
+                        alignment: 'center',
+                    },
+                    {
+                        columns: [
+                            {
+                                width: '70%',
+                                text: `สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ มหาวิทยาลัยสงขลานครินทร์
                                 15 ถนนกาญจนวณิชย์ ตำบลหาดใหญ่ อำเภอหาดใหญ่
                                 จังหวัดสงขลา 90110 
                                 โทร. 0-7428-2102, 0-7428-2073 โทรสาร 074 282 111 
                                 อีเมล : naowarat.s@psu.ac.th, orathai.b@psu.ac.th`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 40,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 40,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
 
-                                // },
-                                {
-                                    width: '30%',
-                                    text: `เลขที่ \t 2/2564 \n วันที่ ${str_date}`,
-                                    style: 'text_normal'
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            // columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            // style: 'tableExample',
-                            table: {
-                                headerRows: 1,
-                                // heights: ['*', 100, '*'],
-                                widths: [231, 222],
-                                // dontBreakRows: true,
-                                // keepWithHeaderRows: 1,
-                                body: [
-                                    // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
-                                    [
-                                        // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
-                                        {
-                                            text: [
-                                                {
-                                                    text: 'ที่อยู่ ',
-                                                    font: 'PSU',
-                                                    fontSize: 16,
-                                                    bold: true
-                                                },
-                                                {
-                                                    text: `${model.address}`,
-                                                    font: 'PSU',
-                                                    fontSize: 16
-                                                },
-                                            ]
-                                        },
-                                        [
+                            // },
+                            {
+                                width: '30%',
+                                text: `เลขที่ \t 2/2564 \n วันที่ ${str_date}`,
+                                style: 'text_normal'
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
+                        ],
+                        // columnGap: 10,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        // style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            // heights: ['*', 100, '*'],
+                            widths: [231, 222],
+                            // dontBreakRows: true,
+                            // keepWithHeaderRows: 1,
+                            body: [
+                                // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
+                                [
+                                    // [{text: 'ที่อยู่ ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    // [{text: 'เงื่อนไขการเสนอราคา ', font: 'PSU', fontSize: 16}, {text: 'กาเาวนาดนหกาดวนา', font:'PSU', fontSize: 16}],
+                                    {
+                                        text: [
                                             {
-                                                text: 'เงื่อนไขการเสนอราคา \t',
+                                                text: 'ที่อยู่ ',
                                                 font: 'PSU',
                                                 fontSize: 16,
                                                 bold: true
                                             },
                                             {
-                                                text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
-                                                font: 'PSU',
-                                                fontSize: 16
-                                            },
-                                            // { text: 'กำหนดยืนราคา \t ค่า \t วัน', font: 'PSU', fontSize: 16 },
-                                            {
-                                                text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                                text: `${model.address}`,
                                                 font: 'PSU',
                                                 fontSize: 16
                                             },
                                         ]
-
-
+                                    },
+                                    [
+                                        {
+                                            text: 'เงื่อนไขการเสนอราคา \t',
+                                            font: 'PSU',
+                                            fontSize: 16,
+                                            bold: true
+                                        },
+                                        {
+                                            text: `กำหนดชำระเงิน \t ${model.payment_due} \t วัน`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
+                                        // { text: 'กำหนดยืนราคา \t ค่า \t วัน', font: 'PSU', fontSize: 16 },
+                                        {
+                                            text: `กำหนดรับประกัน \t ${model.guarantee} \t ปี`,
+                                            font: 'PSU',
+                                            fontSize: 16
+                                        },
                                     ]
-                                ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: ['*', 200, '*'],
-                                widths: [231, 52, 76, 76],
-                                body: [
-                                    [
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รายละเอียดสินค้า',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'จำนวน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'ราคาต่อหน่วย',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            fillColor: '#EEECE1',
-                                            text: 'รวมเงิน',
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                    ],
-                                    [
-                                        {
-                                            text: `1. ${model.product_detail_1}`,
-                                            style: 'text_normal',
-                                        },
-                                        {
-                                            text: `${addCommas(model.product_number_1.toString())}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
 
-                                        },
-                                        {
-                                            text: `${addCommas(product_prize_1)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        },
-                                        {
-                                            text: `${addCommas(total_money_th_1)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            text: `(${thaibath})`,
-                                            style: 'text_normal',
-                                            colSpan: 3,
-                                            alignment: 'left',
-                                        },
-                                        {},
-                                        {},
-                                        {
-                                            text: `${addCommas(total_money)}`,
-                                            style: 'text_normal',
-                                            alignment: 'center',
-                                        }
-                                    ],
 
                                 ]
-                            }
-                        },
-                        {
-                            text: '\u200b \n',
-                        },
-                        {
-                            table: {
-                                heights: [100],
-                                widths: [462],
-                                body: [
-                                    [
-                                        [
-                                            {
-                                                columns: [
-                                                    {
-                                                        width: '55%',
-                                                        text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
-                                                        style: 'text_normal',
-                                                    },
-                                                    {
-                                                        width: '*',
-                                                        text: [
-                                                            {
-                                                                text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
-                                                                style: 'text_normal',
-                                                            },
-                                                            {
-                                                                text: `\n \u200b \t    ${position[0]} `,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                            {
-                                                                text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
-                                                                style: 'text_normal',
-                                                                fontSize: 15
-                                                            },
-                                                        ],
+                            ]
+                        }
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: ['*', 200, '*'],
+                            widths: [231, 52, 76, 76],
+                            body: [
+                                [
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รายละเอียดสินค้า',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'จำนวน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'ราคาต่อหน่วย',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        fillColor: '#EEECE1',
+                                        text: 'รวมเงิน',
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                ],
+                                [
+                                    {
+                                        text: `1. ${model.product_detail_1}`,
+                                        style: 'text_normal',
+                                    },
+                                    {
+                                        text: `${addCommas(model.product_number_1.toString())}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
-                                                    },
-                                                ],
-                                                columnGap: 0,
-                                            },
+                                    },
+                                    {
+                                        text: `${addCommas(product_prize_1)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    },
+                                    {
+                                        text: `${addCommas(total_money_th_1)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
 
-                                        ]
-                                    ],
-
-
-
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: `(${thaibath})`,
+                                        style: 'text_normal',
+                                        colSpan: 3,
+                                        alignment: 'left',
+                                    },
+                                    {},
+                                    {},
+                                    {
+                                        text: `${addCommas(total_money)}`,
+                                        style: 'text_normal',
+                                        alignment: 'center',
+                                    }
                                 ],
 
-                            },
+                            ]
                         }
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    width: 595.3,
-                    height: 841.9,
-                    // [left, top, right, bottom]
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 19.85, 72, 45.35],
-                    styles: {
-                        text_normal: {
-                            fontSize: 16,
-                            font: 'PSU',
+                    },
+                    {
+                        text: '\u200b \n',
+                    },
+                    {
+                        table: {
+                            heights: [100],
+                            widths: [462],
+                            body: [
+                                [
+                                    [
+                                        {
+                                            columns: [
+                                                {
+                                                    width: '55%',
+                                                    text: 'ผู้รับของ \n\n (ลงชื่อ).................................................. \n \u200b \t (..................................................) \n ตำแหน่ง.................................................. \n วันที่..................................................',
+                                                    style: 'text_normal',
+                                                },
+                                                {
+                                                    width: '*',
+                                                    text: [
+                                                        {
+                                                            text: `ผู้ส่งของ \n\n (ลงชื่อ)........................................ \n \u200b \t \t (${model.forwarder})`,
+                                                            style: 'text_normal',
+                                                        },
+                                                        {
+                                                            text: `\n \u200b \t    ${position[0]} `,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                        {
+                                                            text: `   ${position[1]} \n \u200b \t   มหาวิทยาลัยสงขลานครินทร์`,
+                                                            style: 'text_normal',
+                                                            fontSize: 15
+                                                        },
+                                                    ],
+
+                                                },
+                                            ],
+                                            columnGap: 0,
+                                        },
+
+                                    ]
+                                ],
+
+
+
+                            ],
+
                         },
-                        text_bole: {
-                            fontSize: 16,
-                            font: 'PSU',
-                            bold: true,
-                        }
                     }
-                };
-
-            }
-
-            // console.log(product_prize + ' : ' + total_money);
-            // console.log(typeof total_money);
-            // console.log(total_money);
-
-            // console.log(thaibath);
-
-            this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
-            this.pdfMake.createPdf(docDefinition).open();
-
-        } catch (err) {
-            this.alert.notify(`function generateInvoice : ` + err.Message);
+                ],
+                pageSize: 'A4',
+                pageOrientation: 'portrait',
+                width: 595.3,
+                height: 841.9,
+                // [left, top, right, bottom]
+                // pageMargins: [31.7, 10, 25, 10],
+                pageMargins: [89.85, 19.85, 72, 45.35],
+                styles: {
+                    text_normal: {
+                        fontSize: 16,
+                        font: 'PSU',
+                    },
+                    text_bole: {
+                        fontSize: 16,
+                        font: 'PSU',
+                        bold: true,
+                    }
+                }
+            };
 
         }
+
+        // console.log(product_prize + ' : ' + total_money);
+        // console.log(typeof total_money);
+        // console.log(total_money);
+
+        // console.log(thaibath);
+
+        this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
+        this.pdfMake.createPdf(docDefinition).open();
+        return true;
+
+        // } catch (err) {
+        //     this.alert.notify(`function generateInvoice : ` + err.Message);
+
+        // }
 
     }
 
     // สร้างเอกสารแจ้งหนี้
     async generateInvoiceDocs(model: InInvoiceDocument) {
         await this.loadPdfMaker();
-        try {
-            let position = model.guarantor_position.split(' ');
-            // let d_bend = 2.54 / 2.54 * 72;
-            // const img_link = "https://1.bp.blogspot.com/-yyZceDUuEWg/XX8yFMWQdzI/AAAAAAADSQ0/h4KCe71MRgoPyyU97XGmwZBDSOd8yanXQCKgBGAsYHg/s640/%25E0%25B8%25A1%25E0%25B8%25AB%25E0%25B8%25B2%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B8%2597%25E0%25B8%25A2%25E0%25B8%25B2%25E0%25B8%25A5%25E0%25B8%25B1%25E0%25B8%25A2%25E0%25B8%25AA%25E0%25B8%2587%25E0%25B8%2582%25E0%25B8%25A5%25E0%25B8%25B2%25E0%25B8%2599%25E0%25B8%2584%25E0%25B8%25A3%25E0%25B8%25B4%25E0%25B8%2599%25E0%25B8%2597%25E0%25B8%25A3%25E0%25B9%258C.jpg";
-
-
-            let str_message_end = "จึงเรียนมาเพื่อโปรดดำเนินการ โดยโอนเงินเข้าบัญชี สำนักนวัตกรรมดิจิทัล และระบบอัจฉริยะ 2 เลขที่บัญชี 565-2-45084-7 ธนาคารไทยพาณิชย์ จำกัด (มหาชน) สาขา มหาวิทยาลัยสงขลานครินทร์ และกรุณาส่งสำเนาใบโอนเงินให้สำนักนวัตกรรมดิจิทัลและระบบ อัจฉริยะทราบ เพื่อดำเนินการออกใบเสร็จรับเงินต่อไป จักขอบคุณยิ่ง"
-            let date = model.date.split("-");
-            let y_eng = parseInt(date[0]);
-            let y_th = y_eng + 543;
-            let yy = y_th.toString();
-            let m = date[1].toString();
-            let mm = await this.convertMount(m);
-            let dd = date[2].toString();
-            // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
-            let str_date = dd + ' ' + mm + ' ' + yy + ' ';
-
-            if (model.address == '' || model.address == ' ' || model.address == null) {
-                const docDefinition = {
-                    content: [
-                        {
-                            image: await this.img,
-                            width: 68.25,
-                            height: 112.5,
-                            alignment: "center",
-
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: 200,
-                                    text: `ที่ อว 68011.1/${model.id_doc}`,
-                                    font: 'PSU',
-                                    fontSize: 16,
-                                },
-                                {
-                                    width: 40,
-                                    text: '\u200b',
-                                    font: 'Roboto',
-
-                                },
-                                {
-                                    width: 220,
-                                    text: 'สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ \n มหาวิทยาลัยสงขลานครินทร์ \n  ต. หาดใหญ่ อ.หาดใหญ่ \n จ. สงขลา 90110',
-                                    font: 'PSU',
-                                    fontSize: 16,
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            text: `${str_date}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [222, 2, 10, 20],
-                        },
-                        {
-                            text: `เรื่อง ${model.title} \n เรียน ${model.title_to}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        // {
-                        //     text: `\u200b \t${model.address}`,
-                        //     font: 'PSU',
-                        //     fontSize: 16,
-                        //     // margin: [70, 2, 5, 1],
-                        // },
-                        {
-
-                            text: `\u200b \t \t \t ${model.message}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [d_bend, 2, 5, 1],
-
-                        },
-                        // {
-
-                        //     text: `${str_start}`,
-                        //     font: 'PSU',
-                        //     fontSize: 16,
-                        //     margin: [50, 2, 5, 1],
-
-                        // },
-                        // {
-
-                        //     text: `${str_end_u}`,
-                        //     font: 'PSU',
-                        //     fontSize: 16,
-                        //     margin: [100, 2, 5, 1],
-
-                        // },
-                        {
-
-                            text: `\u200b \t \t \t ${str_message_end}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [d_bend, 2, 5, 1],
-
-                        },
-                        {
-                            text: `\n ขอแสดงความนับถือ \n \n \n (${model.guarantor})`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [222, 2, 10, 2],
-                        },
-                        {
-                            text: `${model.guarantor_position}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [89.85, 2, 10, 20],
-                            alignment: "center",
-                        },
-                        {
-                            text: `\n\n\nสำนักงานนวิตกรรมดิจิทัลและระบบอัจฉริยะ`,
-                            font: "PSU",
-                            fontSize: 16,
-                            bold: true,
-                        },
-                        {
-
-                            text: `โทรศัพท์ 0-7428-2102 \n โทรสาร 0-7428-2111 \n อิเมล์ผู้ประสานงาน : preeda.n@psu.ac.th, panida.o@psu.ac.th`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [10, 2, 10, 20],
-
-                        },
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 28.35, 70.9, 28.35],
-
-                };
-                this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
-                this.pdfMake.createPdf(docDefinition).open();
-            }
-            else {
-                const docDefinition = {
-                    content: [
-                        {
-                            image: await this.img,
-                            width: 68.25,
-                            height: 112.5,
-                            alignment: "center",
-
-                        },
-                        {
-                            columns: [
-                                {
-                                    width: 200,
-                                    text: `ที่ อว 68011.1/${model.id_doc}`,
-                                    font: 'PSU',
-                                    fontSize: 16,
-                                },
-                                {
-                                    width: 40,
-                                    text: '\u200b',
-                                    font: 'Roboto',
-
-                                },
-                                {
-                                    width: 220,
-                                    text: 'สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ \n มหาวิทยาลัยสงขลานครินทร์ \n  ต. หาดใหญ่ อ.หาดใหญ่ \n จ. สงขลา 90110',
-                                    font: 'PSU',
-                                    fontSize: 16,
-                                },
-                                // {
-                                //     width: 10,
-                                //     text: '\u200b',
-                                //     font: 'Roboto',
-                                // }
-                            ],
-                            columnGap: 10,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            text: `${str_date}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [222, 2, 10, 20],
-                        },
-                        {
-                            text: `เรื่อง ${model.title} \n เรียน ${model.title_to}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [50, 2, 5, 1],
-                        },
-                        {
-                            text: `\u200b \t${model.address}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [70, 2, 5, 1],
-                        },
-                        {
-
-                            text: `\u200b \t \t \t ${model.message}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [d_bend, 2, 5, 1],
-
-                        },
-                        // {
-
-                        //     text: `${str_start}`,
-                        //     font: 'PSU',
-                        //     fontSize: 16,
-                        //     margin: [50, 2, 5, 1],
-
-                        // },
-                        // {
-
-                        //     text: `${str_end_u}`,
-                        //     font: 'PSU',
-                        //     fontSize: 16,
-                        //     margin: [100, 2, 5, 1],
-
-                        // },
-                        {
-
-                            text: `\u200b \t \t \t ${str_message_end}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [d_bend, 2, 5, 1],
-
-                        },
-                        {
-                            text: `\n ขอแสดงความนับถือ \n \n \n (${model.guarantor})`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [222, 2, 10, 2],
-                        },
-                        {
-                            text: `${position[0] + position[1]}`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            margin: [89.85, 2, 10, 20],
-                            alignment: "center",
-                        },
-                        {
-                            text: `\n\n\nสำนักงานนวิตกรรมดิจิทัลและระบบอัจฉริยะ`,
-                            font: "PSU",
-                            fontSize: 16,
-                            bold: true,
-                        },
-                        {
-
-                            text: `โทรศัพท์ 0-7428-2102 \n โทรสาร 0-7428-2111 \n อิเมล์ผู้ประสานงาน : preeda.n@psu.ac.th, panida.o@psu.ac.th`,
-                            font: 'PSU',
-                            fontSize: 16,
-                            // margin: [10, 2, 10, 20],
-
-                        },
-                    ],
-                    pageSize: 'A4',
-                    pageOrientation: 'portrait',
-                    // pageMargins: [31.7, 10, 25, 10],
-                    pageMargins: [89.85, 28.35, 70.9, 28.35],
-
-                };
-                this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
-                this.pdfMake.createPdf(docDefinition).open();
-
-            }
-
-        } catch (err) {
-            this.alert.notify(`function generateInvoiceDocs : ` + err.Message);
+        // try {
+        if (model.date == '' || model.date == ' ' || model.date == null) {
+            this.alert.notify(`กรุณากรอกวันที่ให้ถูกค้อง`);
+            return false;
         }
-
-    }
-    async generateMessageMemos(model: InMessageMemos) {
-        await this.loadPdfMaker();
-        try {
-            let position = model.guarantor_position.split(' ');
-            // let d_bend = 2.54 / 2.54 * 72;
-            // const img_link = "https://1.bp.blogspot.com/-yyZceDUuEWg/XX8yFMWQdzI/AAAAAAADSQ0/h4KCe71MRgoPyyU97XGmwZBDSOd8yanXQCKgBGAsYHg/s640/%25E0%25B8%25A1%25E0%25B8%25AB%25E0%25B8%25B2%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B8%2597%25E0%25B8%25A2%25E0%25B8%25B2%25E0%25B8%25A5%25E0%25B8%25B1%25E0%25B8%25A2%25E0%25B8%25AA%25E0%25B8%2587%25E0%25B8%2582%25E0%25B8%25A5%25E0%25B8%25B2%25E0%25B8%2599%25E0%25B8%2584%25E0%25B8%25A3%25E0%25B8%25B4%25E0%25B8%2599%25E0%25B8%2597%25E0%25B8%25A3%25E0%25B9%258C.jpg";
+        let position = model.guarantor_position.split(' ');
+        // let d_bend = 2.54 / 2.54 * 72;
+        // const img_link = "https://1.bp.blogspot.com/-yyZceDUuEWg/XX8yFMWQdzI/AAAAAAADSQ0/h4KCe71MRgoPyyU97XGmwZBDSOd8yanXQCKgBGAsYHg/s640/%25E0%25B8%25A1%25E0%25B8%25AB%25E0%25B8%25B2%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B8%2597%25E0%25B8%25A2%25E0%25B8%25B2%25E0%25B8%25A5%25E0%25B8%25B1%25E0%25B8%25A2%25E0%25B8%25AA%25E0%25B8%2587%25E0%25B8%2582%25E0%25B8%25A5%25E0%25B8%25B2%25E0%25B8%2599%25E0%25B8%2584%25E0%25B8%25A3%25E0%25B8%25B4%25E0%25B8%2599%25E0%25B8%2597%25E0%25B8%25A3%25E0%25B9%258C.jpg";
 
 
-            let str_message_end = "จึงเรียนมาเพื่อโปรดดำเนินการ โดยโอนเงินเข้าบัญชี สำนักนวัตกรรมดิจิทัล และระบบอัจฉริยะ 2 เลขที่บัญชี 565-2-45084-7 ธนาคารไทยพาณิชย์ จำกัด (มหาชน) สาขา มหาวิทยาลัยสงขลานครินทร์ และกรุณาส่งสำเนาใบโอนเงินให้สำนักนวัตกรรมดิจิทัลและระบบ อัจฉริยะทราบ เพื่อดำเนินการออกใบเสร็จรับเงินต่อไป จักขอบคุณยิ่ง"
-            let date = model.date.split("-");
-            let y_eng = parseInt(date[0]);
-            let y_th = y_eng + 543;
-            let yy = y_th.toString();
-            let m = date[1].toString();
-            let mm = await this.convertMount(m);
-            let dd = date[2].toString();
-            // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
-            let str_date = dd + ' ' + mm + ' ' + yy + ' ';
+        let str_message_end = "จึงเรียนมาเพื่อโปรดดำเนินการ โดยโอนเงินเข้าบัญชี สำนักนวัตกรรมดิจิทัล และระบบอัจฉริยะ 2 เลขที่บัญชี 565-2-45084-7 ธนาคารไทยพาณิชย์ จำกัด (มหาชน) สาขา มหาวิทยาลัยสงขลานครินทร์ และกรุณาส่งสำเนาใบโอนเงินให้สำนักนวัตกรรมดิจิทัลและระบบ อัจฉริยะทราบ เพื่อดำเนินการออกใบเสร็จรับเงินต่อไป จักขอบคุณยิ่ง"
+        let date = model.date.split("-");
+        let y_eng = parseInt(date[0]);
+        let y_th = y_eng + 543;
+        let yy = y_th.toString();
+        let m = date[1].toString();
+        let mm = await this.convertMount(m);
+        let dd = date[2].toString();
+        // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
+        let str_date = dd + ' ' + mm + ' ' + yy + ' ';
+
+        if (model.address == '' || model.address == ' ' || model.address == null) {
             const docDefinition = {
                 content: [
                     {
+                        image: await this.img,
+                        width: 68.25,
+                        height: 112.5,
+                        alignment: "center",
+
+                    },
+                    {
                         columns: [
-                            {
-                                image: await this.img,
-                                width: 36,
-                                height: 57.6,
-                            },
                             {
                                 width: 200,
-                                text: `\nบันทึกข้อความ`,
+                                text: `ที่ อว 68011.1/${model.id_doc}`,
                                 font: 'PSU',
-                                bold: true,
-                                fontSize: 22,
-                            }
-
-                        ],
-                        columnGap: 130,
-
-                    },
-                    {
-
-                        width: 250,
-                        text: [
-                            {
-                                text: `ส่วนงาน`,
-                                font: 'PSU',
-                                bold: true,
                                 fontSize: 16,
                             },
                             {
-                                text: `  สำนักงานนวัตกรรมดิจิทัลและระบบอัจฉริยะ  โทร. 2102`,
+                                width: 40,
+                                text: '\u200b',
+                                font: 'Roboto',
+
+                            },
+                            {
+                                width: 220,
+                                text: 'สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ \n มหาวิทยาลัยสงขลานครินทร์ \n  ต. หาดใหญ่ อ.หาดใหญ่ \n จ. สงขลา 90110',
                                 font: 'PSU',
                                 fontSize: 16,
-                            }
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
                         ],
+                        columnGap: 10,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        text: `${str_date}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        margin: [222, 2, 10, 20],
+                    },
+                    {
+                        text: `เรื่อง ${model.title} \n เรียน ${model.title_to}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    // {
+                    //     text: `\u200b \t${model.address}`,
+                    //     font: 'PSU',
+                    //     fontSize: 16,
+                    //     // margin: [70, 2, 5, 1],
+                    // },
+                    {
+
+                        text: `\u200b \t \t \t ${model.message}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [d_bend, 2, 5, 1],
+
+                    },
+                    // {
+
+                    //     text: `${str_start}`,
+                    //     font: 'PSU',
+                    //     fontSize: 16,
+                    //     margin: [50, 2, 5, 1],
+
+                    // },
+                    // {
+
+                    //     text: `${str_end_u}`,
+                    //     font: 'PSU',
+                    //     fontSize: 16,
+                    //     margin: [100, 2, 5, 1],
+
+                    // },
+                    {
+
+                        text: `\u200b \t \t \t ${str_message_end}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [d_bend, 2, 5, 1],
+
+                    },
+                    {
+                        text: `\n ขอแสดงความนับถือ \n \n \n (${model.guarantor})`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        margin: [222, 2, 10, 2],
+                    },
+                    {
+                        text: `${model.guarantor_position}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        margin: [89.85, 2, 10, 20],
+                        alignment: "center",
+                    },
+                    {
+                        text: `\n\n\nสำนักงานนวิตกรรมดิจิทัลและระบบอัจฉริยะ`,
+                        font: "PSU",
+                        fontSize: 16,
+                        bold: true,
+                    },
+                    {
+
+                        text: `โทรศัพท์ 0-7428-2102 \n โทรสาร 0-7428-2111 \n อิเมล์ผู้ประสานงาน : preeda.n@psu.ac.th, panida.o@psu.ac.th`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [10, 2, 10, 20],
+
+                    },
+                ],
+                pageSize: 'A4',
+                pageOrientation: 'portrait',
+                // pageMargins: [31.7, 10, 25, 10],
+                pageMargins: [89.85, 28.35, 70.9, 28.35],
+
+            };
+        }
+        else {
+            const docDefinition = {
+                content: [
+                    {
+                        image: await this.img,
+                        width: 68.25,
+                        height: 112.5,
+                        alignment: "center",
+
                     },
                     {
                         columns: [
                             {
-                                text: [
-                                    {
-                                        text: `ที่`,
-                                        font: `PSU`,
-                                        fontSize: 16,
-                                        bold: true,
-                                    },
-                                    {
-                                        text: ` มอ 011/${model.id_doc}`,
-                                        font: `PSU`,
-                                        fontSize: 16,
-
-                                    }
-                                ],
+                                width: 200,
+                                text: `ที่ อว 68011.1/${model.id_doc}`,
+                                font: 'PSU',
+                                fontSize: 16,
+                            },
+                            {
+                                width: 40,
+                                text: '\u200b',
+                                font: 'Roboto',
 
                             },
                             {
-                                text: `${str_date}`,
+                                width: 220,
+                                text: 'สำนักนวัตกรรมดิจิทัลและระบบอัจฉริยะ \n มหาวิทยาลัยสงขลานครินทร์ \n  ต. หาดใหญ่ อ.หาดใหญ่ \n จ. สงขลา 90110',
                                 font: 'PSU',
                                 fontSize: 16,
-                            }
-
+                            },
+                            // {
+                            //     width: 10,
+                            //     text: '\u200b',
+                            //     font: 'Roboto',
+                            // }
                         ],
-                        columGap: 10,
+                        columnGap: 10,
+                        // margin: [50, 2, 5, 1],
                     },
                     {
-                        text: [
-                            {
-                                text: `เรื่อง`,
-                                font: 'PSU',
-                                fontSize: 16,
-                                bold: true,
-                            },
-                            {
-                                text: `  ${model.title}`,
-                                font: 'PSU',
-                                fontSize: 16,
-                            }
-                        ],
+                        text: `${str_date}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        margin: [222, 2, 10, 20],
                     },
                     {
-                        text: [
-                            {
-                                text: `เรียน`,
-                                font: 'PSU',
-                                fontSize: 16,
-                                bold: true,
-                            },
-                            {
-                                text: `   ${model.title_to}`,
-                                font: 'PSU',
-                                fontSize: 16,
-                            }
-                        ],
+                        text: `เรื่อง ${model.title} \n เรียน ${model.title_to}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [50, 2, 5, 1],
+                    },
+                    {
+                        text: `\u200b \t${model.address}`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [70, 2, 5, 1],
                     },
                     {
 
                         text: `\u200b \t \t \t ${model.message}`,
                         font: 'PSU',
                         fontSize: 16,
+                        // margin: [d_bend, 2, 5, 1],
 
                     },
+                    // {
+
+                    //     text: `${str_start}`,
+                    //     font: 'PSU',
+                    //     fontSize: 16,
+                    //     margin: [50, 2, 5, 1],
+
+                    // },
+                    // {
+
+                    //     text: `${str_end_u}`,
+                    //     font: 'PSU',
+                    //     fontSize: 16,
+                    //     margin: [100, 2, 5, 1],
+
+                    // },
                     {
 
                         text: `\u200b \t \t \t ${str_message_end}`,
                         font: 'PSU',
                         fontSize: 16,
+                        // margin: [d_bend, 2, 5, 1],
+
                     },
                     {
-                        text: `\n \n \n (${model.guarantor})`,
+                        text: `\n ขอแสดงความนับถือ \n \n \n (${model.guarantor})`,
                         font: 'PSU',
                         fontSize: 16,
                         margin: [222, 2, 10, 2],
                     },
                     {
-                        text: `${position[0]}${position[1]}`,
+                        text: `${position[0] + position[1]}`,
                         font: 'PSU',
                         fontSize: 16,
                         margin: [89.85, 2, 10, 20],
                         alignment: "center",
                     },
+                    {
+                        text: `\n\n\nสำนักงานนวิตกรรมดิจิทัลและระบบอัจฉริยะ`,
+                        font: "PSU",
+                        fontSize: 16,
+                        bold: true,
+                    },
+                    {
+
+                        text: `โทรศัพท์ 0-7428-2102 \n โทรสาร 0-7428-2111 \n อิเมล์ผู้ประสานงาน : preeda.n@psu.ac.th, panida.o@psu.ac.th`,
+                        font: 'PSU',
+                        fontSize: 16,
+                        // margin: [10, 2, 10, 20],
+
+                    },
                 ],
                 pageSize: 'A4',
                 pageOrientation: 'portrait',
+                // pageMargins: [31.7, 10, 25, 10],
                 pageMargins: [89.85, 28.35, 70.9, 28.35],
 
             };
             this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
             this.pdfMake.createPdf(docDefinition).open();
-
-        } catch (err) {
-            this.alert.notify(`function generateMessageMemos : ` + err.Message);
+            return true;
 
         }
+
+        // } catch (err) {
+        //     this.alert.notify(`function generateInvoiceDocs : ` + err.Message);
+        // }
+
+    }
+    async generateMessageMemos(model: InMessageMemos) {
+        await this.loadPdfMaker();
+        // try {
+        if (model.date == '' || model.date == ' ' || model.date == null) {
+            this.alert.notify(`กรุณากรอกวันที่ให้ถูกค้อง`);
+            return false;
+        }
+        let position = model.guarantor_position.split(' ');
+        // let d_bend = 2.54 / 2.54 * 72;
+        // const img_link = "https://1.bp.blogspot.com/-yyZceDUuEWg/XX8yFMWQdzI/AAAAAAADSQ0/h4KCe71MRgoPyyU97XGmwZBDSOd8yanXQCKgBGAsYHg/s640/%25E0%25B8%25A1%25E0%25B8%25AB%25E0%25B8%25B2%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B8%2597%25E0%25B8%25A2%25E0%25B8%25B2%25E0%25B8%25A5%25E0%25B8%25B1%25E0%25B8%25A2%25E0%25B8%25AA%25E0%25B8%2587%25E0%25B8%2582%25E0%25B8%25A5%25E0%25B8%25B2%25E0%25B8%2599%25E0%25B8%2584%25E0%25B8%25A3%25E0%25B8%25B4%25E0%25B8%2599%25E0%25B8%2597%25E0%25B8%25A3%25E0%25B9%258C.jpg";
+
+
+        let str_message_end = "จึงเรียนมาเพื่อโปรดดำเนินการ โดยโอนเงินเข้าบัญชี สำนักนวัตกรรมดิจิทัล และระบบอัจฉริยะ 2 เลขที่บัญชี 565-2-45084-7 ธนาคารไทยพาณิชย์ จำกัด (มหาชน) สาขา มหาวิทยาลัยสงขลานครินทร์ และกรุณาส่งสำเนาใบโอนเงินให้สำนักนวัตกรรมดิจิทัลและระบบ อัจฉริยะทราบ เพื่อดำเนินการออกใบเสร็จรับเงินต่อไป จักขอบคุณยิ่ง"
+        let date = model.date.split("-");
+        let y_eng = parseInt(date[0]);
+        let y_th = y_eng + 543;
+        let yy = y_th.toString();
+        let m = date[1].toString();
+        let mm = await this.convertMount(m);
+        let dd = date[2].toString();
+        // console.log(` ตัวแปรวันที่ : ${model.date} \n ตัวแปรหลังจาก แบ่ง : ${date} , ${date[0]} , ${date[1]} , ${date[2]} \n dd: ${dd} \n mm : ${mm} \n yy : ${yy}`);
+        let str_date = dd + ' ' + mm + ' ' + yy + ' ';
+        const docDefinition = {
+            content: [
+                {
+                    columns: [
+                        {
+                            image: await this.img,
+                            width: 36,
+                            height: 57.6,
+                        },
+                        {
+                            width: 200,
+                            text: `\nบันทึกข้อความ`,
+                            font: 'PSU',
+                            bold: true,
+                            fontSize: 22,
+                        }
+
+                    ],
+                    columnGap: 130,
+
+                },
+                {
+
+                    width: 250,
+                    text: [
+                        {
+                            text: `ส่วนงาน`,
+                            font: 'PSU',
+                            bold: true,
+                            fontSize: 16,
+                        },
+                        {
+                            text: `  สำนักงานนวัตกรรมดิจิทัลและระบบอัจฉริยะ  โทร. 2102`,
+                            font: 'PSU',
+                            fontSize: 16,
+                        }
+                    ],
+                },
+                {
+                    columns: [
+                        {
+                            text: [
+                                {
+                                    text: `ที่`,
+                                    font: `PSU`,
+                                    fontSize: 16,
+                                    bold: true,
+                                },
+                                {
+                                    text: ` มอ 011/${model.id_doc}`,
+                                    font: `PSU`,
+                                    fontSize: 16,
+
+                                }
+                            ],
+
+                        },
+                        {
+                            text: `${str_date}`,
+                            font: 'PSU',
+                            fontSize: 16,
+                        }
+
+                    ],
+                    columGap: 10,
+                },
+                {
+                    text: [
+                        {
+                            text: `เรื่อง`,
+                            font: 'PSU',
+                            fontSize: 16,
+                            bold: true,
+                        },
+                        {
+                            text: `  ${model.title}`,
+                            font: 'PSU',
+                            fontSize: 16,
+                        }
+                    ],
+                },
+                {
+                    text: [
+                        {
+                            text: `เรียน`,
+                            font: 'PSU',
+                            fontSize: 16,
+                            bold: true,
+                        },
+                        {
+                            text: `   ${model.title_to}`,
+                            font: 'PSU',
+                            fontSize: 16,
+                        }
+                    ],
+                },
+                {
+
+                    text: `\u200b \t \t \t ${model.message}`,
+                    font: 'PSU',
+                    fontSize: 16,
+
+                },
+                {
+
+                    text: `\u200b \t \t \t ${str_message_end}`,
+                    font: 'PSU',
+                    fontSize: 16,
+                },
+                {
+                    text: `\n \n \n (${model.guarantor})`,
+                    font: 'PSU',
+                    fontSize: 16,
+                    margin: [222, 2, 10, 2],
+                },
+                {
+                    text: `${position[0]}${position[1]}`,
+                    font: 'PSU',
+                    fontSize: 16,
+                    margin: [89.85, 2, 10, 20],
+                    alignment: "center",
+                },
+            ],
+            pageSize: 'A4',
+            pageOrientation: 'portrait',
+            pageMargins: [89.85, 28.35, 70.9, 28.35],
+
+        };
+        this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
+        this.pdfMake.createPdf(docDefinition).open();
+        return true
+
+        // } catch (err) {
+        //     this.alert.notify(`function generateMessageMemos : ` + err.Message);
+
+        // }
 
 
     }
@@ -1804,6 +1828,7 @@ export class PdfService {
             this.alert.notify('สร้างฟอร์มสำเร็จ', 'info');
 
             this.pdfMake.createPdf(docDefinition).open();
+            return true;
 
         } catch (err) {
             this.alert.notify(`function generateTesting : ` + err.Message);

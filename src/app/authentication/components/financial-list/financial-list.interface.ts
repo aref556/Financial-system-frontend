@@ -1,3 +1,5 @@
+import { TemplateRef } from "@angular/core";
+import { BsModalRef } from "ngx-bootstrap/modal";
 import { PageChangedEvent } from "ngx-bootstrap/pagination";
 import { InDocument, InFlagStatus, InRoleDocument } from "src/app/authentication/services/financial-document.service";
 import { InAccount, InRoleAccount } from "src/app/shareds/services/account.service";
@@ -24,10 +26,12 @@ export interface InFinancialListComponent {
     getFlagStatus(role: InFlagStatus): void;
     onDeleteDocument(item: InDocument): void;
     onLookDocument(item: InDocument);
-    onSuccessStatus(item: InDocument);
 
     UserLogin: InAccount;
     Role: typeof InRoleAccount;
+
+    modalRef: BsModalRef;
+    openModal(template: TemplateRef<any>);
 
 }
 

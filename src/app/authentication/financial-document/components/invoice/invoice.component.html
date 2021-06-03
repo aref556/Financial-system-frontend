@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <form [formGroup]="form" (submit)="onSubmit()">
-                     <!-- ประเภทของรายได้ -->
+                    <!-- ประเภทของรายได้ -->
                     <!-- <div class="form-group">
                         <label class="control-label">ประเภทของรายได้</label>
                         <small class="form-text text-muted">
@@ -42,6 +42,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>ที่ อว 68011.1/ :</label>
+                        <input class="form-control" formControlName="id_doc" type="text" placeholder="088">
+                        <small class="form-text text-muted">
+                            หากไม่ระบุ
+                        </small>
+                    </div>
+
                     <div class="form-group">
                         <label>*วันที่:</label>
                         <input class="form-control" formControlName="date" type="date">

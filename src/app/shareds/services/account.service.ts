@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { InSuccessProcess } from "src/app/authentication/components/financial-list/success-process/success-process.interface";
 import { InModalChangePassword } from "src/app/authentication/components/profile/modal-change-password/modal-change-password.interface";
 import { InProfile } from "src/app/authentication/components/profile/profile.interface";
 import { InLogin } from "src/app/components/login/login.interface";
@@ -56,6 +57,12 @@ export class AccountService {
                 return this.setUserLogin(userLogin);
             });
     }
+
+    // onSuccessProcess(accessToken: string, model: InSuccessProcess) {
+    //     return this.http
+    //         .requestPost(`api/document/accept-document`, model, accessToken)
+    //         .toPromise() as Promise<{ status: boolean }>;
+    // }
 }
 
 export interface InAccount {

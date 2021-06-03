@@ -12,6 +12,8 @@ import { UserService } from './services/user.services';
 import { FinancialDocumentService } from './services/financial-document.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalChangePasswordComponent } from './components/profile/modal-change-password/modal-change-password.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SuccessProcessComponent } from './components/financial-list/success-process/success-process.component';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { ModalChangePasswordComponent } from './components/profile/modal-change-
     ProfileComponent,
     FinancialListComponent,
     ModalChangePasswordComponent,
+    SuccessProcessComponent,
   ],
   imports: [
     CommonModule,

@@ -75,19 +75,40 @@ export class InvoiceComponent implements InInvoiceComponent {
     this.doc.forwarder = this.forwarder_select.name;
     this.doc.forwarder_position = this.forwarder_select.job_position;
     this.doc.type_income = this.type_income_select.type;
-    if (this.doc.product_detail_2 != '' || this.doc.product_number_2 != null || this.doc.product_prize_2 != null) {
-      if (this.doc.product_detail_2 != '' && this.doc.product_number_2 != null && this.doc.product_prize_2 != null) {
-        this.pdf.generateInvoice(this.doc);
-        this.service.onCreateInvoice(this.doc);
+    try {
+      if (this.doc.product_detail_2 != '' || this.doc.product_number_2 != null || this.doc.product_prize_2 != null) {
+        if (this.doc.product_detail_2 != '' && this.doc.product_number_2 != null && this.doc.product_prize_2 != null) {
+          this.pdf.generateInvoice(this.doc)
+            .then(res => {
+              if (res) {
+                this.service.onCreateInvoice(this.doc);
+              }
+            })
+            .catch(err => {
+              this.alert.notify(err.Message);
+            })
+        }
+        else {
+          this.alert.notify('กรุณากรอกข้อมูลของสินค้า 2 ให้ครบ');
+        }
       }
       else {
-        this.alert.notify('กรุณากรอกข้อมูลของสินค้า 2 ให้ครบ');
+        this.pdf.generateInvoice(this.doc)
+          .then(res => {
+            if (res) {
+              this.service.onCreateInvoice(this.doc);
+            }
+          })
+          .catch(err => {
+            this.alert.notify(err.Message);
+          })
       }
+
+    } catch (err) {
+      this.alert.notify(`Invoice onSubmit: ` + err.Message);
+
     }
-    else {
-      this.pdf.generateInvoice(this.doc);
-      this.service.onCreateInvoice(this.doc);
-    }
+
   }
 
   onSelectType(select: TypeIncome): void {
@@ -97,7 +118,7 @@ export class InvoiceComponent implements InInvoiceComponent {
   // สร้างฟอร์ม
   private initialCreateFormData() {
     this.form = this.builder.group({
-      id_doc: [null, Validators.required],
+      id_doc: [null],
       address: ['', Validators.required],
       payment_due: ['', Validators.required],
       guarantee: ['', Validators.required],

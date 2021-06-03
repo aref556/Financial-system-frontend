@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { InRoleDocument, InDocument, FinancialDocumentService, InFlagStatus } from 'src/app/authentication/services/financial-document.service';
 import { AuthenService } from 'src/app/services/authen.service';
@@ -10,7 +11,8 @@ import { InInvoiceDocument } from '../../financial-document/components/invoice-d
 import { InInvoice } from '../../financial-document/components/invoice/invoice.interface';
 import { InMessageMemos } from '../../financial-document/components/message-memos/message-memos.interface';
 import { InDocumentList, InDocumentSearch, InDocumentSearchKey, InFinancialListComponent } from './financial-list.interface';
-
+import { listLocales } from 'ngx-bootstrap/chronos';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-financial-list',
   templateUrl: './financial-list.component.html',
@@ -24,12 +26,14 @@ export class FinancialListComponent implements InFinancialListComponent {
     private detect: ChangeDetectorRef,
     private account: AccountService,
     private authen: AuthenService,
+    private localeService: BsLocaleService,
     private pdf: PdfService,
+    private modalService: BsModalService,
 
 
   ) {
     // เปลี่ยน Dateoicker เป็นภาษาไทย
-
+    // this.localeService.use('th');
     // โหลดข้อมูลเอกสาร
     this.initialLoadDocuments({
       startPage: this.startPage,
@@ -42,6 +46,8 @@ export class FinancialListComponent implements InFinancialListComponent {
 
 
   }
+  modalRef: BsModalRef<any>;
+
 
   items: InDocumentList;
   // ตัวแปรสำหรับค้นหา
@@ -50,7 +56,8 @@ export class FinancialListComponent implements InFinancialListComponent {
   searchTypeItems: InDocumentSearchKey[] = [
     { key: 'type', value: 'ค้นหาจากประเภทของเอกสาร' },
     { key: 'id_doc', value: 'ค้นหาจากหมายเลขเอกสาร' },
-    { key: 'updated', value: 'ค้นหาจากวันที่' },
+    { key: 'date', value: 'ค้นหาจากวันที่ในเอกสาร' },
+    { key: 'updated', value: 'ค้นหาจากวันที่สร้างเอกสาร' },
 
   ];
   // ตัวแปร pagination
@@ -178,12 +185,24 @@ export class FinancialListComponent implements InFinancialListComponent {
 
   async onSuccessStatus(item: InDocument) {
     const doc = await this.document.updateFlagStatus(item.id);
-    this.initialLoadDocuments({
-      searchText: this.getSearchText,
-      searchType: this.searchType.key,
-      startPage: this.startPage,
-      limitPage: this.limitPage
-    })
+
+  }
+
+  openModal(template: TemplateRef<any>, item: InDocument) {
+    try {
+      this.modalRef = this.modalService.show(template);
+      this.initialLoadDocuments({
+        searchText: this.getSearchText,
+        searchType: this.searchType.key,
+        startPage: this.startPage,
+        limitPage: this.limitPage
+      })
+
+    } catch (err) {
+      this.alert.notify(`function openModal : ` + err.Message);
+      console.log(`function openModal : ` + err.Message);
+    }
+
   }
 
   private get getSearchText() {
@@ -193,15 +212,31 @@ export class FinancialListComponent implements InFinancialListComponent {
         case 'type':
           responseSearchText = InRoleDocument[this.searchText] || '';
           break;
+        case 'date':
+          // const searchDate: { from: Date, to: Date } = { from: this.searchText[0], to: this.searchText[1] } as any;
+          // searchDate.from.setHours(0);
+          // searchDate.from.setMinutes(0);
+          // searchDate.from.setSeconds(0);
+          // searchDate.to.setHours(23);
+          // searchDate.to.setMinutes(59);
+          // searchDate.to.setSeconds(59);
+          // responseSearchText = searchDate;
+          // break;
+          console.log(this.searchText);
+          responseSearchText = this.searchText;
+          break;
         case 'updated':
-          const searchDate: { from: Date, to: Date } = { from: this.searchText[0], to: this.searchText[1] } as any;
-          searchDate.from.setHours(0);
-          searchDate.from.setMinutes(0);
-          searchDate.from.setSeconds(0);
-          searchDate.to.setHours(23);
-          searchDate.to.setMinutes(59);
-          searchDate.to.setSeconds(59);
-          responseSearchText = searchDate;
+          // const searchDate: { from: Date, to: Date } = { from: this.searchText[0], to: this.searchText[1] } as any;
+          // searchDate.from.setHours(0);
+          // searchDate.from.setMinutes(0);
+          // searchDate.from.setSeconds(0);
+          // searchDate.to.setHours(23);
+          // searchDate.to.setMinutes(59);
+          // searchDate.to.setSeconds(59);
+          // responseSearchText = searchDate;
+          // break;
+          console.log(this.searchText);
+          responseSearchText = this.searchText;
           break;
         default:
           responseSearchText = this.searchText;
@@ -210,7 +245,7 @@ export class FinancialListComponent implements InFinancialListComponent {
       return responseSearchText;
 
     } catch (err) {
-      this.alert.notify(err.Message)
+      this.alert.notify(`getSearch: ` + err.Message);
     }
 
   }
@@ -224,7 +259,7 @@ export class FinancialListComponent implements InFinancialListComponent {
         this.items = items;
         // console.log(this.items);
       })
-      .catch(err => this.alert.notify(err.Message));
+      .catch(err => this.alert.notify(`initialLoadDoc: ` + err.Message));
   }
 
   // โหลดข้อมูลผู้ใช้ที่ยัง Login

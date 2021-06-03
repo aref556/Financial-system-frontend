@@ -88,8 +88,16 @@ export class DeliveryComponent implements InDeliveryComponent {
       }
     }
     else {
-      this.pdf.generateDelivery(this.doc);
-      this.service.onCreateDelivery(this.doc);
+      this.pdf.generateDelivery(this.doc)
+        .then(res => {
+          if (res) {
+            this.service.onCreateDelivery(this.doc);
+          }
+        })
+        .catch(err => {
+          this.alert.notify(err.Message);
+        })
+
     }
 
 
@@ -103,7 +111,7 @@ export class DeliveryComponent implements InDeliveryComponent {
   // สร้างฟอร์ม
   private initialCreateFormData() {
     this.form = this.builder.group({
-      id_doc: [null, Validators.required],
+      id_doc: [null],
       address: ['', Validators.required],
       payment_due: ['', Validators.required],
       guarantee: ['', Validators.required],

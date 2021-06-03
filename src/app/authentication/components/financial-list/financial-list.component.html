@@ -23,6 +23,8 @@
                     <h3 class="title">
                         <i class="fa fa-list"></i> รายการข้อมูลเอกสาร
                     </h3>
+
+
                     <!-- ค้นหา -->
                     <div class="form-group">
                         <div class="input-group">
@@ -41,9 +43,24 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            <!-- <div class="row">
+                                <div class="col-xs-12 col-12 col-md-4 form-group">
+
+                                </div>
+                                <div class="col-xs-12 col-12 col-md-4 form-group">
+                                    <input type="text" placeholder="Daterangepicker" class="form-control" placeholder=""
+                                        bsDaterangepicker [bsConfig]="{ adaptivePosition: true }">
+                                </div>
+                            </div> -->
+
                             <div [ngSwitch]="searchType.key">
-                                <input *ngSwitchCase="'updated'" bsDaterangepicker placement="left" type="text"
-                                    [(ngModel)]="searchText" class="form-control" placeholder="ค้นหาข้อมูล">
+                                <input *ngSwitchCase="'updated'" type="date" [(ngModel)]="searchText"
+                                    placeholder="ค้นหาข้อมูล" class="form-control">
+                                <input *ngSwitchCase="'date'" type="date" [(ngModel)]="searchText"
+                                    placeholder="ค้นหาข้อมูล" class="form-control">
+                                <input *ngSwitchCase="'type'" type="text" [(ngModel)]="searchText" class="form-control"
+                                    placeholder="ค้นหาข้อมูล">
                                 <input *ngSwitchDefault type="text" [(ngModel)]="searchText" class="form-control"
                                     placeholder="ค้นหาข้อมูล">
                             </div>
@@ -82,8 +99,10 @@
                                     <td>{{ item.created_by }}</td>
                                     <td>{{ item.created_time | date : 'dd-MM-yyyy' }}</td>
                                     <td class="text-center">
-                                        <i (click)="onSuccessStatus(item)" class="fa fa-paper-plane cur" aria-hidden="true">&nbsp;/&nbsp;</i>
-                                        <i (click)="onLookDocument(item)" class="fa fa-file cur" aria-hidden="true">&nbsp;/&nbsp;</i>
+                                        <i (click)="openModal(template)" class="fa fa-paper-plane cur"
+                                            aria-hidden="true">&nbsp;/&nbsp;</i>
+                                        <i (click)="onLookDocument(item)" class="fa fa-file cur"
+                                            aria-hidden="true">&nbsp;/&nbsp;</i>
                                         <i (click)="onDeleteDocument(item)" class="fa fa-trash cur">&nbsp;&nbsp;</i>
                                     </td>
                                 </tr>
@@ -108,3 +127,7 @@
         </div>
     </div>
 </app-auth-content>
+
+<ng-template #template>
+    <app-success-process [modalRef]="modalRef"></app-success-process>
+  </ng-template>

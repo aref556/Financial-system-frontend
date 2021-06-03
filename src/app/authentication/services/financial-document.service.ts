@@ -6,6 +6,7 @@ import { InInvoice } from "src/app/authentication/financial-document/components/
 import { InMessageMemos } from "src/app/authentication/financial-document/components/message-memos/message-memos.interface";
 import { AuthenService } from "src/app/services/authen.service";
 import { HttpService } from "src/app/services/http.service";
+import { InSuccessProcess } from "../components/financial-list/success-process/success-process.interface";
 declare let $;
 @Injectable()
 export class FinancialDocumentService {
@@ -59,10 +60,9 @@ export class FinancialDocumentService {
     }
 
     // แก้ไขข้อมูลสถานะการดำเนินงาน
-    updateFlagStatus(id: any) {
-        const flag_status = {'flag_status': 2};
+    updateFlagStatus(id: any, model: InSuccessProcess) {
         return this.http
-            .requestPut(`api/document/handle-status/${id}`, flag_status, this.auth.getAuthenticated() )
+            .requestPut(`api/document/handle-status/${id}`, model, this.auth.getAuthenticated() )
             .toPromise() as Promise<InDocument>;
     }
 

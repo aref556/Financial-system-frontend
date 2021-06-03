@@ -81,8 +81,16 @@ export class MessageMemosComponent implements InMessageMemosComponent {
     this.doc.guarantor_position = this.forwarder_select.job_position;
     this.doc.type_income = this.type_income_select.type;
     // console.log(this.doc);
-    this.pdf.generateMessageMemos(this.doc);
-    this.service.onCreateMessageMemos(this.doc);
+    this.pdf.generateMessageMemos(this.doc)
+      .then(res => {
+        if (res) {
+          this.service.onCreateMessageMemos(this.doc);
+        }
+      })
+      .catch(err => {
+        this.alert.notify(err.Message);
+      })
+
   }
 
   // สร้างฟอร์ม

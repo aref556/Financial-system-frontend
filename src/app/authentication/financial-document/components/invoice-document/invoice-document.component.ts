@@ -84,8 +84,16 @@ export class InvoiceDocumentComponent implements InInvoiceDocumentComponent {
     this.doc.guarantor_position = this.forwarder_select.job_position;
     this.doc.type_income = this.type_income_select.type;
     // console.log(this.doc);
-    this.pdf.generateInvoiceDocs(this.doc);
-    this.service.onCreateInvoiceDocument(this.doc);
+    this.pdf.generateInvoiceDocs(this.doc)
+      .then(res => {
+        if (res) {
+          this.service.onCreateInvoiceDocument(this.doc);
+        }
+      })
+      .catch(err => {
+        this.alert.notify(err.Message);
+      })
+
     // this.account
     //   .onCreateFinancialDocument(this.form.value)
     //   .then(res => {
