@@ -99,7 +99,7 @@
                                     <td>{{ item.created_by }}</td>
                                     <td>{{ item.created_time | date : 'dd-MM-yyyy' }}</td>
                                     <td class="text-center">
-                                        <i (click)="openModal(template)" class="fa fa-paper-plane cur"
+                                        <i (click)="openModal(template, item)" class="fa fa-paper-plane cur"
                                             aria-hidden="true">&nbsp;/&nbsp;</i>
                                         <i (click)="onLookDocument(item)" class="fa fa-file cur"
                                             aria-hidden="true">&nbsp;/&nbsp;</i>
